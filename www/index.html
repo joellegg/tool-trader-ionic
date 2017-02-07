@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="ionicApp">
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -15,38 +15,16 @@
   <script src="cordova.js"></script>
 </head>
 
-<body>
+<body ng-app="ionicApp">
 
-  <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="bar-energized">
     <ion-nav-back-button>
     </ion-nav-back-button>
   </ion-nav-bar>
 
   <ion-nav-view></ion-nav-view>
 
-  <script id="templates/tabs.html" type="text/ng-template">
-    <ion-tabs class="tabs-icon-top tabs-positive">
-
-      <ion-tab title="Home" icon="ion-ios-home" href="#/tab/home">
-        <ion-nav-view name="home-tab"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab title="Messages" icon="ion-ios-email" href="#/tab/messages">
-        <ion-nav-view name="messages-tab"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab title="Profile" icon="ion-ios-person" ui-sref="tabs.profile">
-        <ion-nav-view name="profile-tab"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab title="Calendar" icon="ion-ios-calendar" ui-sref="tabs.calendar">
-        <ion-nav-view name="calendar-tab"></ion-nav-view>
-      </ion-tab>
-
-    </ion-tabs>
-  </script>
-
-  <script id="templates/home.html" type="text/ng-template">
+  <script id="partials/home.html" type="text/ng-template">
     <ion-view view-title="Home">
       <ion-content class="padding">
         <p>
@@ -56,7 +34,7 @@
     </ion-view>
   </script>
 
-  <script id="templates/facts.html" type="text/ng-template">
+  <script id="partials/facts.html" type="text/ng-template">
     <ion-view view-title="Facts">
       <ion-content class="padding">
         <p>Banging your head against a wall uses 150 calories an hour.</p>
@@ -72,7 +50,7 @@
     </ion-view>
   </script>
 
-  <script id="templates/facts2.html" type="text/ng-template">
+  <script id="partials/facts2.html" type="text/ng-template">
     <ion-view view-title="Also Factual">
       <ion-content class="padding">
         <p>111,111,111 x 111,111,111 = 12,345,678,987,654,321</p>
@@ -89,7 +67,7 @@
     </ion-view>
   </script>
 
-  <script id="templates/messages.html" type="text/ng-template">
+  <script id="partials/messages.html" type="text/ng-template">
     <ion-view view-title="Messages">
       <ion-content class="padding">
         <h3>Create hybrid mobile apps with the web technologies you love.</h3>
@@ -102,7 +80,7 @@
     </ion-view>
   </script>
 
-  <script id="templates/nav-stack.html" type="text/ng-template">
+  <script id="partials/nav-stack.html" type="text/ng-template">
     <ion-view view-title="Tab Nav Stack">
       <ion-content class="padding">
         <p><img src="http://ionicframework.com/img/diagrams/tabs-nav-stack.png" style="width:100%"></p>
@@ -110,15 +88,15 @@
     </ion-view>
   </script>
 
-  <script id="templates/profile.html" type="text/ng-template">
+  <script id="partials/profile.html" type="text/ng-template">
     <ion-view title="Profile">
       <ion-content>
         <div class="list">
           <div class="item">
-            @IonicFramework
+            @JoeltheAwesome
           </div>
           <div class="item">
-            @DriftyTeam
+            @JamesKingoftheWest
           </div>
         </div>
       </ion-content>
