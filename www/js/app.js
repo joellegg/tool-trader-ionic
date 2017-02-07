@@ -13,7 +13,6 @@ angular.module('ionicApp', ['ionic'])
       views: {
         'home-tab': {
           templateUrl: "partials/home.html",
-          controller: 'HomeTabCtrl'
         }
       }
     })
@@ -65,7 +64,6 @@ angular.module('ionicApp', ['ionic'])
         }
       }
     });
-
 
    $urlRouterProvider.otherwise("/tab/home");
 

@@ -12,4 +12,4 @@ Tool-trader is an app that allows you to borrow or rent tools from friends and l
 
 [github repo](https://github.com/joellegg/tool-trader)
 
-[moqups](https://app.moqups.com/joellegg/wQNH7hWKnS/edit/page/a40cc6033)
+[moqups](https://app.moqups.com/joellegg/wQNH7hWKnS/view)
