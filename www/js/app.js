@@ -14,13 +14,16 @@ angular.module('ionicApp', ['ionic'])
         'home-tab': {
           templateUrl: "partials/home.html",
         }
+        // 'search': {
+        //   templateUrl: "partials/navsearch.html"
+        // }
       }
     })
-    .state('tabs.facts', {
-      url: "/facts",
+    .state('tabs.toolRental', {
+      url: "/toolRental",
       views: {
         'home-tab': {
-          templateUrl: "partials/facts.html"
+          templateUrl: "partials/toolRental.html"
         }
       }
     })
