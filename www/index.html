@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ionicApp">
 
 <head>
   <meta charset="utf-8">
@@ -16,16 +16,114 @@
 </head>
 
 <body>
-  <!-- footer -->
-  <div class="bar bar-footer row">
-    <a class="col item item-icon-center ion-ios-home" href="#"></a>
-    <a class="col item item-icon-center ion-ios-calendar-outline" href="#"></a>
-    <a class="col item item-icon-center ion-ios-email-outline" href="#"></a>
-    <a class="col item item-icon-center ion-ios-person" href="#"></a>
-    <a class="col item item-icon-center" href="#">
-      <i class="icon ion-email"></i>
-    </a>
-  </div>
+
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-nav-view></ion-nav-view>
+
+  <script id="templates/tabs.html" type="text/ng-template">
+    <ion-tabs class="tabs-icon-top tabs-positive">
+
+      <ion-tab title="Home" icon="ion-ios-home" href="#/tab/home">
+        <ion-nav-view name="home-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Messages" icon="ion-ios-email" href="#/tab/messages">
+        <ion-nav-view name="messages-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Profile" icon="ion-ios-person" ui-sref="tabs.profile">
+        <ion-nav-view name="profile-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Calendar" icon="ion-ios-calendar" ui-sref="tabs.calendar">
+        <ion-nav-view name="calendar-tab"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
+  </script>
+
+  <script id="templates/home.html" type="text/ng-template">
+    <ion-view view-title="Home">
+      <ion-content class="padding">
+        <p>
+          <a class="button icon icon-right ion-chevron-right" href="#/tab/facts">Scientific Facts</a>
+        </p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="templates/facts.html" type="text/ng-template">
+    <ion-view view-title="Facts">
+      <ion-content class="padding">
+        <p>Banging your head against a wall uses 150 calories an hour.</p>
+        <p>Dogs have four toes on their hind feet, and five on their front feet.</p>
+        <p>The ant can lift 50 times its own weight, can pull 30 times its own weight and always falls over on its right side when intoxicated.</p>
+        <p>A cockroach will live nine days without it's head, before it starves to death.</p>
+        <p>Polar bears are left handed.</p>
+        <p>
+          <a class="button icon ion-home" href="#/tab/home"> Home</a>
+          <a class="button icon icon-right ion-chevron-right" href="#/tab/facts2">More Facts</a>
+        </p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="templates/facts2.html" type="text/ng-template">
+    <ion-view view-title="Also Factual">
+      <ion-content class="padding">
+        <p>111,111,111 x 111,111,111 = 12,345,678,987,654,321</p>
+        <p>1 in every 4 Americans has appeared on T.V.</p>
+        <p>11% of the world is left-handed.</p>
+        <p>1 in 8 Americans has worked at a McDonalds restaurant.</p>
+        <p>$283,200 is the absolute highest amount of money you can win on Jeopardy.</p>
+        <p>101 Dalmatians, Peter Pan, Lady and the Tramp, and Mulan are the only Disney cartoons where both parents are present and don't die throughout the movie.</p>
+        <p>
+          <a class="button icon ion-home" href="#/tab/home"> Home</a>
+          <a class="button icon ion-chevron-left" href="#/tab/facts"> Scientific Facts</a>
+        </p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="templates/messages.html" type="text/ng-template">
+    <ion-view view-title="Messages">
+      <ion-content class="padding">
+        <h3>Create hybrid mobile apps with the web technologies you love.</h3>
+        <p>Free and open source, Ionic offers a library of mobile-optimized HTML, CSS and JS components for building highly interactive apps.</p>
+        <p>Built with Sass and optimized for AngularJS.</p>
+        <p>
+          <a class="button icon icon-right ion-chevron-right" href="#/tab/navstack">Tabs Nav Stack</a>
+        </p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="templates/nav-stack.html" type="text/ng-template">
+    <ion-view view-title="Tab Nav Stack">
+      <ion-content class="padding">
+        <p><img src="http://ionicframework.com/img/diagrams/tabs-nav-stack.png" style="width:100%"></p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="templates/profile.html" type="text/ng-template">
+    <ion-view title="Profile">
+      <ion-content>
+        <div class="list">
+          <div class="item">
+            @IonicFramework
+          </div>
+          <div class="item">
+            @DriftyTeam
+          </div>
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>
 
 </body>
 
