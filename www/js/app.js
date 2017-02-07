@@ -70,7 +70,3 @@ angular.module('ionicApp', ['ionic'])
    $urlRouterProvider.otherwise("/tab/home");
 
 })
-
-.controller('HomeTabCtrl', function($scope) {
-  console.log('HomeTabCtrl');
-});
