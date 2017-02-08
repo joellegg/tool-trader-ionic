@@ -8,7 +8,7 @@
 // firebase.initializeApp(config);
 
 
-angular.module('ionicApp', ['ionic', 'starter.controllers', 'starter.factories'])
+angular.module('ionicApp', ['ionic', 'ngCordova', 'firebase', 'starter.controllers', 'starter.factories'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
