@@ -2,23 +2,39 @@
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-energized">
     <h1 class="title">Add to Tool Shed</h1>
-    <button ng-controller="AddToolCtrl" class="button button-clear button-primary" ng-click="hideAddToolModal">Cancel</button>
+    <button class="button button-clear button-primary" ng-click="hideAddToolModal()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
-      <label class="item item-input">
-        <span class="input-label">First Name</span>
-        <input ng-model="newUser.firstName" type="text">
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Category
+        </div>
+        <select>
+          <option selected>Category</option>
+          <option>Power Tool</option>
+          <option>Hand Tool</option>
+          <option>Machine</option>
+        </select>
       </label>
       <label class="item item-input">
-        <span class="input-label">Last Name</span>
-        <input ng-model="newUser.lastName" type="text">
+        <span class="input-label">tool</span>
+        <input ng-model="newTool.tool" type="text">
       </label>
       <label class="item item-input">
-        <span class="input-label">Email</span>
-        <input ng-model="newUser.email" type="text">
+        <span class="input-label">condition</span>
+        <input ng-model="newTool.condition" type="text">
       </label>
-      <button class="button button-full button-energized" ng-click="createContact(newUser)">Create</button>
+      <label class="item item-input">
+        <span class="input-label">image</span>
+        <input ng-model="newTool.image" type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">cost</span>
+        <input ng-model="newTool.cost" type="text">
+      </label>
+      <button class="button button-full button-energized" ng-click="createContact(newUser)">Add</button>
     </div>
   </ion-content>
 </ion-modal-view>

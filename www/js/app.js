@@ -23,15 +23,7 @@ angular.module('ionicApp', ['ionic', 'starter.controllers', 'starter.factories']
       views: {
         'home-tab': {
           templateUrl: "partials/home.html",
-          controller: "ToolSearchCtrl"
-        }
-      }
-    })
-    .state('tabs.toolRental', {
-      url: "/toolRental",
-      views: {
-        'home-tab': {
-          templateUrl: "partials/toolRental.html"
+          controller: "AddToolCtrl"
         }
       }
     })
