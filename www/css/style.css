@@ -1,9 +1,5 @@
 /* Empty. Add your own CSS if you like */
 
-.toolProfile {
-  margin-top: 4em;
-}
-
 
 /*Buttons*/
 
@@ -20,6 +16,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+
 .gallery > .col {
   width: 22%;
   flex-wrap: wrap;

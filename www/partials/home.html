@@ -1,3 +1,4 @@
+<!-- Search bar for tools to rent -->
 <div ion-nav-view="search">
   <div class="bar bar-energized bar-header item-input-inset">
     <label class="item-input-wrapper">
@@ -7,41 +8,16 @@
   </div>
 </div>
 
+<!-- Tool Shed & Rental History -->
 <ion-view view-title="Home">
-  <ion-content class="padding">
-    <div class="toolProfile">
-      <h1>Tool shed</h1>
-      <div class="gallery">
-        <button class="col button button-energized squareAdd" ng-click="showAddToolModal()">+</button>
-        <p class="col" ng-repeat="(key, value) in tools">{{value.tool}}</p>
-      </div>
-      <p>
-        <a class="button icon icon-right ion-chevron-right" href="#/tab/toolRental">Tool Rental</a>
-      </p>
+  <ion-content class="padding has-header">
+    <h1>Tool Shed</h1>
+    <div class="gallery">
+      <button class="col button button-energized squareAdd" ng-click="showAddToolModal()">
+        <h1>+</h1>
+      </button>
+      <p class="col" ng-repeat="(key, value) in tools">{{value.tool}}</p>
     </div>
+    <h1>Rental History</h1>
   </ion-content>
 </ion-view>
-
-<!-- <ion-modal-view>
-  <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">New Contact</h1>
-    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-  </ion-header-bar>
-  <ion-content class="padding">
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">First Name</span>
-        <input ng-model="newUser.firstName" type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Last Name</span>
-        <input ng-model="newUser.lastName" type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Email</span>
-        <input ng-model="newUser.email" type="text">
-      </label>
-      <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
-    </div>
-  </ion-content>
-</ion-modal-view> -->

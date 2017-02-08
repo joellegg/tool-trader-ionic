@@ -1,14 +1,15 @@
-// var config = {
-//   apiKey: "AIzaSyBtisZZHzrnlDLYpQ73Jz5Oq_p1-7712Vg",
-//   authDomain: "tool-trader.firebaseapp.com",
-//   databaseURL: "https://tool-trader.firebaseio.com",
-//   storageBucket: "tool-trader.appspot.com",
-//   messagingSenderId: "167198110300"
-// };
-// firebase.initializeApp(config);
+// initialize firebase
+var config = {
+  apiKey: "AIzaSyBtisZZHzrnlDLYpQ73Jz5Oq_p1-7712Vg",
+  authDomain: "tool-trader.firebaseapp.com",
+  databaseURL: "https://tool-trader.firebaseio.com",
+  storageBucket: "tool-trader.appspot.com",
+  messagingSenderId: "167198110300"
+};
+firebase.initializeApp(config);
 
 
-angular.module('ionicApp', ['ionic', 'ngCordova', 'firebase', 'starter.controllers', 'starter.factories'])
+angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starter.factories'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 

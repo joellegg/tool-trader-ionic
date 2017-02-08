@@ -1,6 +1,8 @@
 var controllerModule = angular.module('starter.controllers', [])
 
-controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, ToolsFactory) {
+controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, ToolsFactory) {
+  $scope.newTool = {};
+
 
   $ionicModal.fromTemplateUrl('partials/add-tool-modal.html', {
     scope: $scope
@@ -18,26 +20,19 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, ToolsFa
     $scope.modal.hide()
   };
 
-  $scope.createContact = function(u) {
-    $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
-    $scope.modal.hide();
-  };
-
   // console.log('Tool search controller');
   ToolsFactory.getTools()
     .then((res) => {
       $scope.tools = res;
     })
 
-});
+  let storageRef = firebase.storage().ref();
 
-controllerModule.controller('PictureCtrl', function($scope, $cordovaCamera, $firebaseArray) {
-
-  $scope.images = [];
+  // take picture of tool function and get data response
   $scope.takePicture = function() {
     var options = {
-      quality: 75,
-      destinationType: Camera.DestinationType.DATA_URL,
+      quality: 100,
+      destinationType: Camera.DestinationType.NATIVE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
@@ -46,51 +41,26 @@ controllerModule.controller('PictureCtrl', function($scope, $cordovaCamera, $fir
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
-
     $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      // get response from imageData
+      // let File = $('#fileUpload').prop('files')[0]
+      $scope.img = imageData;
+      // ToolsFactory.addToolImage({ img: $scope.imgURI });
+      // alert('Tool image added!')
     }, function(err) {
-      // An error occured. Show a message to the user
+      alert('error', err)// An error occured. Show a message to the user
     });
   }
-});
-///////////////////////
-/////////////////////////
-/////////////////////////
-controllerModule.controller("SecureController", function($scope, $ionicHistory, $firebaseArray, $cordovaCamera) {
 
-    $ionicHistory.clearHistory();
+  // add image to firebase storage then add tool to firebase with image uid.
+  $scope.addTool = function(res) {
+    console.log(res);
 
-    $scope.images = [];
-
-    var fbAuth = fb.getAuth();
-    if(fbAuth) {
-        var userReference = fb.child("users/" + fbAuth.uid);
-        var syncArray = $firebaseArray(userReference.child("images"));
-        $scope.images = syncArray;
-    } else {
-        $state.go("firebase");
-    }
-
-    $scope.upload = function() {
-        var options = {
-            quality : 75,
-            destinationType : Camera.DestinationType.DATA_URL,
-            sourceType : Camera.PictureSourceType.CAMERA,
-            allowEdit : true,
-            encodingType: Camera.EncodingType.JPEG,
-            popoverOptions: CameraPopoverOptions,
-            targetWidth: 500,
-            targetHeight: 500,
-            saveToPhotoAlbum: false
-        };
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            syncArray.$add({image: imageData}).then(function() {
-                alert("Image has been uploaded");
-            });
-        }, function(error) {
-            console.error(error);
-        });
-    }
+    // storageRef.child($scope.img.name + userId).put($scope.img)
+    //   .then(function(snapshot) {
+    //     $http.patch(`https://reddit-steve.firebaseio.com/posts/${userId}.json`, { image: snapshot.downloadURL });
+    //     console.log("downloadurl", snapshot.downloadURL)
+    //   }).catch(console.error);
+  };
 
 });
