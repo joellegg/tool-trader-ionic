@@ -35,14 +35,6 @@ angular.module('ionicApp', ['ionic', 'starter.controllers', 'starter.factories']
         }
       }
     })
-    .state('tabs.facts2', {
-      url: "/facts2",
-      views: {
-        'home-tab': {
-          templateUrl: "partials/facts2.html"
-        }
-      }
-    })
     .state('tabs.messages', {
       url: "/messages",
       views: {
