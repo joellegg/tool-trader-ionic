@@ -1,4 +1,14 @@
-angular.module('ionicApp', ['ionic'])
+// var config = {
+//   apiKey: "AIzaSyBtisZZHzrnlDLYpQ73Jz5Oq_p1-7712Vg",
+//   authDomain: "tool-trader.firebaseapp.com",
+//   databaseURL: "https://tool-trader.firebaseio.com",
+//   storageBucket: "tool-trader.appspot.com",
+//   messagingSenderId: "167198110300"
+// };
+// firebase.initializeApp(config);
+
+
+angular.module('ionicApp', ['ionic', 'starter.controllers', 'starter.factories'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -13,10 +23,8 @@ angular.module('ionicApp', ['ionic'])
       views: {
         'home-tab': {
           templateUrl: "partials/home.html",
+          controller: "ToolSearchCtrl"
         }
-        // 'search': {
-        //   templateUrl: "partials/navsearch.html"
-        // }
       }
     })
     .state('tabs.toolRental', {
@@ -68,6 +76,6 @@ angular.module('ionicApp', ['ionic'])
       }
     });
 
-   $urlRouterProvider.otherwise("/tab/home");
+  $urlRouterProvider.otherwise("/tab/home");
 
 })
