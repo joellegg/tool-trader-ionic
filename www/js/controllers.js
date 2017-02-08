@@ -54,7 +54,7 @@ controllerModule.controller('PictureCtrl', function($scope, $cordovaCamera, $fir
     });
   }
 });
-////////////////////////
+///////////////////////
 /////////////////////////
 /////////////////////////
 controllerModule.controller("SecureController", function($scope, $ionicHistory, $firebaseArray, $cordovaCamera) {
