@@ -11,7 +11,7 @@ firebase.initializeApp(config);
 // allow anonymous sign in for now
 firebase.auth().signInAnonymously()
   .then(function(_auth) {
-    alert('Logged in!')
+    // alert('Logged in!')
   })
   .catch(function(error) {
     // handle any errors
@@ -22,8 +22,10 @@ firebase.auth().signInAnonymously()
   })
 
 
-angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starter.factories'])
+let controllerModule = angular.module('starter.controllers', [])
+let factoryModule = angular.module('starter.factories', [])
 
+angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starter.factories'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -39,6 +41,11 @@ angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starte
           templateUrl: "partials/home.html",
           controller: "AddToolCtrl"
         }
+      },
+      resolve:{
+        tools(ToolsFactory) {
+          return ToolsFactory.getTools();
+        }
       }
     })
     .state('tabs.messages', {
@@ -49,19 +56,21 @@ angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starte
         }
       }
     })
-    .state('tabs.navstack', {
-      url: "/navstack",
-      views: {
-        'messages-tab': {
-          templateUrl: "partials/nav-stack.html"
-        }
-      }
-    })
     .state('tabs.profile', {
       url: "/profile",
       views: {
         'profile-tab': {
-          templateUrl: "partials/profile.html"
+          templateUrl: "partials/profile.html",
+          controller: 'ProfileCtrl'
+        }
+      }
+    })
+    .state('tabs.auth', {
+      url: "/auth",
+      views: {
+        'auth-tab': {
+          templateUrl: "partials/auth.html",
+          controller: "AuthCtrl"
         }
       }
     })

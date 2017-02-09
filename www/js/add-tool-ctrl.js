@@ -1,6 +1,5 @@
-var controllerModule = angular.module('starter.controllers', [])
-
-controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, ToolsFactory) {
+controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, ToolsFactory) {
+  console.log('AddToolCtrl activated')
   $scope.newTool = {};
 
   // console.log('Tool search controller');
@@ -22,7 +21,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
 
     $cordovaImagePicker.getPictures(options)
       .then(function(results) {
-        debugger
+          // debugger
           // console.log('Image URI: ' + results[0]);
           // confirm we are getting image back
           // alert(results[0])
@@ -162,5 +161,4 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
       _callback(uploadTask.snapshot)
     });
   }
-
 });
