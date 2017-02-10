@@ -2,7 +2,7 @@
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-energized">
     <h1 class="title">Login</h1>
-    <button class="button button-clear button-primary" ng-click="hideLoginModal()">Cancel</button>
+    <button class="button button-clear button-primary" ui-sref="authorize">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
@@ -15,7 +15,7 @@
         <input type="password" ng-model="user.password">
       </label>
       <!-- <div>{{data | json}}</div> -->
-      <button class="button button-full button-balanced" ng-click="login()">login</button>
+      <button class="button button-full button-energized" ng-click="login()">login</button>
     </div>
   </ion-content>
 </ion-modal-view>

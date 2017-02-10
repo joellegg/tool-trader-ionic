@@ -32,8 +32,20 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('authorize', {
       url: "/authorize",
-      templateUrl: "partials/auth.html"
+      templateUrl: "partials/auth.html",
+      controller: "AuthCtrl"
     })
+    .state('login', {
+      url: "/login",
+      templateUrl: "partials/login.html",
+      controller: "AuthCtrl"
+    })
+    .state('register', {
+      url: "/register",
+      templateUrl: "partials/register.html",
+      controller: "AuthCtrl"
+    })
+
     .state('tabs', {
       url: "/tab",
       abstract: true,
