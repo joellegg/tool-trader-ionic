@@ -1,13 +1,14 @@
-factoryModule.factory('AuthFactory', ($q) => {
+factoryModule.factory('AuthFactory', ($q, $http) => {
   return {
     createUser(email, pass) {
       return $q.resolve(firebase.auth().createUserWithEmailAndPassword(email, pass));
     },
+    addUser(newUser) {
+      $http.post('https://tool-trader.firebaseio.com/users.json', newUser)
+    },
     login(email, pass) {
-      console.log("auth", email);
       return $q.resolve(firebase.auth().signInWithEmailAndPassword(email, pass).then((data) => {
         console.log(data.uid);
-        // return UID = data.uid;
       }));
     },
     logout() {

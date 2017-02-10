@@ -9,17 +9,17 @@ var config = {
 firebase.initializeApp(config);
 
 // allow anonymous sign in for now
-firebase.auth().signInAnonymously()
-  .then(function(_auth) {
-    // alert('Logged in!')
-  })
-  .catch(function(error) {
-    // handle any errors
-    let errorCode = error.code;
-    let errorMessage = error.message;
+// firebase.auth().signInAnonymously()
+//   .then(function(_auth) {
+//     // alert('Logged in!')
+//   })
+//   .catch(function(error) {
+//     // handle any errors
+//     let errorCode = error.code;
+//     let errorMessage = error.message;
 
-    alert(errorMessage)
-  })
+//     alert(errorMessage)
+//   })
 
 
 let controllerModule = angular.module('starter.controllers', [])
