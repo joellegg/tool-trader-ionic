@@ -1,6 +1,6 @@
 factoryModule.factory('AuthFactory', ($q) => {
   return {
-    createUser(email, pass, first, last) {
+    createUser(email, pass) {
       return $q.resolve(firebase.auth().createUserWithEmailAndPassword(email, pass));
     },
     login(email, pass) {

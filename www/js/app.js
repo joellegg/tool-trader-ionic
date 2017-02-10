@@ -27,23 +27,6 @@ let factoryModule = angular.module('starter.factories', [])
 
 let myApp = angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starter.factories'])
 
-// myApp.config(function($stateProvider) {
-//   var helloState = {
-//     name: 'hello',
-//     url: '/hello',
-//     template: '<h3>hello world!</h3>'
-//   }
-
-//   var aboutState = {
-//     name: 'about',
-//     url: '/about',
-//     template: '<h3>Its the UI-Router hello world app!</h3>'
-//   }
-
-//   $stateProvider.state(helloState);
-//   $stateProvider.state(aboutState);
-// });
-
 myApp.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider

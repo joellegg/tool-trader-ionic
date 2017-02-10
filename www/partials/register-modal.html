@@ -1,0 +1,37 @@
+<!-- Modal to add a new tool -->
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">Register</h1>
+    <button class="button button-clear button-primary" ng-click="hideRegisterModal()">Cancel</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input type="email" ng-model="user.email">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" ng-model="user.password">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Date of Birth</span>
+        <input type="date" ng-model="user.dob">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">First Name</span>
+        <input type="text" ng-model="user.first">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Last Name</span>
+        <input type="text" ng-model="user.last">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Bio</span>
+        <input type="text" ng-model="user.bio">
+      </label>
+      <!-- <div>{{data | json}}</div> -->
+      <button class="button button-full button-energized" ng-click="register()">register</button>
+    </div>
+  </ion-content>
+</ion-modal-view>
