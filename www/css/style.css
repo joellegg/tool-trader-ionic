@@ -36,3 +36,9 @@
   width: 22%;
   flex-wrap: wrap;
 }
+
+.toolPics {
+  width: 100%;
+  height: auto;
+  max-height: 8em;
+}

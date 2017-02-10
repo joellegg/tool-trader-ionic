@@ -46,10 +46,18 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       controller: "AuthCtrl"
     })
 
-    .state('tabs', {
+  .state('tabs', {
+      cache: false,
       url: "/tab",
       abstract: true,
-      templateUrl: "partials/tabs.html"
+      templateUrl: "partials/tabs.html",
+      resolve: {
+        user(AuthFactory, $location) {
+          return AuthFactory.getUser().catch(() => {
+            $location.url('/authorize')
+          })
+        }
+      }
     })
     .state('tabs.home', {
       url: "/home",
@@ -59,7 +67,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
           controller: "AddToolCtrl"
         }
       },
-      resolve:{
+      resolve: {
         tools(ToolsFactory) {
           return ToolsFactory.getTools();
         }

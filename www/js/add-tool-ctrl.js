@@ -1,8 +1,27 @@
-controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, ToolsFactory) {
-  console.log('AddToolCtrl activated')
+controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory) {
+  $scope.tools = tools;
+  $scope.currentUsersTools;
   $scope.newTool = {};
+  let currentUser;
 
-  // console.log('Tool search controller');
+  AuthFactory.getUser()
+    .then((res) => {
+      // console.log('current user is', res)
+      currentUser = res
+    })
+    .then(() => {
+      // console.log('tools', tools);
+      for (key in $scope.tools) {
+        // console.log('tool key', key)
+        // console.log('tool owner', $scope.tools[key].owner)
+          if (currentUser === $scope.tools[key].owner) {
+            console.log('found match', currentUser, $scope.tools[key].owner)
+            $scope.currentUsersTools = $scope.tools;
+            console.log('users tools', $scope.currentUsersTools)
+        }
+      }
+    })
+
   ToolsFactory.getTools()
     .then((res) => {
       $scope.tools = res;
@@ -21,8 +40,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
 
     $cordovaImagePicker.getPictures(options)
       .then(function(results) {
-          // debugger
-          // console.log('Image URI: ' + results[0]);
           // confirm we are getting image back
           // alert(results[0])
 
@@ -51,7 +68,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         });
   };
 
-  // take picture of tool function and get data response
   $scope.takePicture = function() {
     var options = {
       quality: 100,
@@ -100,6 +116,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         });
   };
 
+
   /////////////////////////////////////
   /////////  MODALS  //////////////////
   /////////////////////////////////////
@@ -110,11 +127,9 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   });
 
   $scope.showAddToolModal = () => {
-    console.log('show modal')
     $scope.modal.show()
   };
   $scope.hideAddToolModal = () => {
-    console.log('hide modal')
     $scope.modal.hide()
   };
 
@@ -124,8 +139,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   ////////////////////////////////////
   // add image to firebase storage then add tool to firebase with image uid.
   $scope.addTool = function(res) {
-    console.log($scope.newTool);
-    console.log(res);
     storageRef.child($scope.imgURI.name + userId).put(File)
       .then(function(snapshot) {
         $http.patch(`https://reddit-steve.firebaseio.com/posts/${userId}.json`, { image: snapshot.downloadURL });

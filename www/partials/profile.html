@@ -4,6 +4,12 @@
     <button class="button button-clear button-primary" ng-click="logout()">logout</button>
   </ion-header-bar>
   <ion-content>
-    <button class="button button-primary" ng-click="showLoginModal()">show modal</button>
+    <img ng-src="http://placehold.it/100x100">
+    <h1>{{userProfile.firstName}}</h1>
+    <h1>{{userProfile.lastName}}</h1>
+    <h2>{{userProfile.email}}</h2>
+    <h2>{{userProfile.dob}}</h2>
+    <h1>bio</h1>
+    <p>{{userProfile.bio}}</p>
   </ion-content>
 </ion-view>

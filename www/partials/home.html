@@ -14,10 +14,10 @@
   <ion-content class="padding has-header">
     <h1>Tool Shed</h1>
     <div class="gallery">
-      <button class="col button button-energized squareAdd" ng-click="showAddToolModal()">
+      <button class="col-25 button button-energized squareAdd" ng-click="showAddToolModal()">
         <h1>+</h1>
       </button>
-      <p class="col" ng-repeat="(key, value) in tools">{{value.tool}}</p>
+      <img class="col-25 toolPics" ng-repeat="(key, value) in currentUsersTools" ng-src="{{value.imageURL}}">
     </div>
     <h1>Rental History</h1>
   </ion-content>
