@@ -5,33 +5,43 @@
     <button class="button button-clear button-primary" ui-sref="authorize">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Email</span>
-        <input type="email" ng-model="user.email">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Password</span>
-        <input type="password" ng-model="user.password">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Date of Birth</span>
-        <input type="date" ng-model="user.dob">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">First Name</span>
-        <input type="text" ng-model="user.first">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Last Name</span>
-        <input type="text" ng-model="user.last">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Bio</span>
-        <textarea type="text" ng-model="user.bio"></textarea>
-      </label>
-      <!-- <div>{{data | json}}</div> -->
-      <button class="button button-full button-energized" ng-click="register()">register</button>
-    </div>
+    <form name="newUser" ng-submit="register()" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="$parent.email" name="email" ng-minlength="5" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="$parent.password" name="password" ng-minlength="6" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Date of Birth</span>
+          <input type="date" ng-model="$parent.dob" name="dob" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input type="text" ng-model="$parent.first" name="first" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input type="text" ng-model="$parent.last" name="last" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Bio</span>
+          <textarea type="text" ng-model="$parent.bio" name="bio" required></textarea>
+        </label>
+        <!-- <div>{{data | json}}</div> -->
+        <!-- <input type="submit" value="register" ng-click="register()"> -->
+        <div class="form-group">
+          <button class="button button-full button-energized" type="submit">register</button>
+        </div>
+      </div>
+    </form>
+    <div class="padding">
+            <p ng-show="newUser.email.$invalid">* Email must be valid</p>
+            <p ng-show="newUser.email.$error.minlength">* Username must be longer than 5 characters</p>
+            <p ng-show="newUser.password.$error.minlength">* Password must be longer than 6 characters</p>
+        </div>
   </ion-content>
 </ion-modal-view>

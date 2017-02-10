@@ -2,7 +2,9 @@ controllerModule.controller('AuthCtrl', function($scope, $ionicModal, AuthFactor
   console.log('AuthCtrl');
 
   $scope.register = () => {
-    console.log("So you want to register, eh?")
+    console.log("So you want to register, eh?");
+    // console.log(email, password, dob, first, last, bio)
+    console.log($scope, $scope.email, $scope.password, $scope.first, $scope.last, $scope.bio)
     // let newuid;
     // authFactory.createUser($scope.user_email, $scope.user_password)
     //   .then((response) => {
