@@ -1,4 +1,4 @@
-controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory) {
+controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory, $q) {
   $scope.tools = tools;
   $scope.currentUsersTools;
   let currentUser;
@@ -108,34 +108,40 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   // create root reference to firebase storage
   let storageRef = firebase.storage().ref();
 
-  $scope.addTool = function() {
+  function uploadImage() {
     // console.log($scope)
-    // if there is no image tell the user to add one
-    if (fileName === undefined) {
-      return alert("Please upload or take an image of the tool.")
-    };
-    let uploadTask = storageRef.child(fileName).put(imageBlob);
+    return $q(function(resolve, reject) {
+      // if there is no image tell the user to add one
+      if (fileName === undefined) {
+        return alert("Please upload or take an image of the tool.")
+      } else {
+        let uploadTask = storageRef.child(fileName).put(imageBlob);
 
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
-    uploadTask.on('state_changed', function(snapshot) {
-        // Observe state change events such as progress, pause, and resume
-      }, function(error) {
-        // Handle unsuccessful uploads
-        alert(error.message)
-        _callback(null)
-      }, function() {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        let toolImage = uploadTask.snapshot.downloadURL;
-        alert(toolImage)
-        imageResponse = toolImage;
+        // Register three observers:
+        // 1. 'state_changed' observer, called any time the state changes
+        // 2. Error observer, called on failure
+        // 3. Completion observer, called on successful completion
+        uploadTask.on('state_changed', function(snapshot) {
+          // Observe state change events such as progress, pause, and resume
+        }, function(error) {
+          // Handle unsuccessful uploads
+          alert(error.message)
+          _callback(null)
+        }, function() {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          let toolImage = uploadTask.snapshot.downloadURL;
+          alert(toolImage)
+          resolve(imageResponse = toolImage)
 
-        // when done pass back information on the saved image
-        // _callback(uploadTask.snapshot)
-      })
+          // when done pass back information on the saved image
+          // _callback(uploadTask.snapshot)
+        })
+      }
+    })
+  };
+  $scope.addTool = function() {
+    uploadImage()
       .then(() => {
         let newTool = {
           "category": $scope.modal.category,
@@ -145,8 +151,10 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
           "owner": currentUser,
           "tool": $scope.modal.tool
         };
-        alert('newTool', newTool)
-          // ToolsFactory.newTool(newTool)
+        ToolsFactory.newTool(newTool)
+      })
+      .catch(() => {
+        alert('there must have been a problem')
       });
   }
 

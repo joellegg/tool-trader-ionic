@@ -3,13 +3,13 @@
     <h1 class="title">Profile</h1>
     <button class="button button-clear button-primary" ng-click="logout()">logout</button>
   </ion-header-bar>
-  <ion-content>
+  <ion-content class="padding">
     <img ng-src="http://placehold.it/100x100">
-    <h1>{{userProfile.firstName}}</h1>
-    <h1>{{userProfile.lastName}}</h1>
-    <h2>{{userProfile.email}}</h2>
-    <h2>{{userProfile.dob}}</h2>
-    <h1>bio</h1>
-    <p>{{userProfile.bio}}</p>
+    <h3>{{userProfile.firstName}}</h3>
+    <h3>{{userProfile.lastName}}</h3>
+    <h3>{{userProfile.email}}</h3>
+    <h2>{{ date }}</h2>
+    <h2>bio</h2>
+    <h5>{{userProfile.bio}}</h5>
   </ion-content>
 </ion-view>

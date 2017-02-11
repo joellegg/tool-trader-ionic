@@ -1,9 +1,8 @@
-controllerModule.controller('ProfileCtrl', function($scope, $ionicModal, $location, AuthFactory, ToolsFactory) {
-  console.log('ProfileCtrl Activated');
-
+controllerModule.controller('ProfileCtrl', function($scope, $location, AuthFactory, ToolsFactory) {
   $scope.userProfile;
 
   let currentUser;
+
   AuthFactory.getUser()
     .then((res) => {
       console.log(res)
@@ -16,9 +15,13 @@ controllerModule.controller('ProfileCtrl', function($scope, $ionicModal, $locati
             if (currentUser === users[keys].uid) {
               // console.log('found match', currentUser, users[keys].uid)
               $scope.userProfile = users[keys];
-              console.log('userProfile', $scope.userProfile)
+              // console.log('userProfile', $scope.userProfile)
             }
           }
+        }).then(() => {
+          let date = new Date($scope.userProfile.dob)
+          $scope.date = date.toDateString();
+          console.log(date.toDateString())
         })
     })
 
