@@ -45,12 +45,10 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
               // success - get blob data
               imageBlob = new Blob([success], { type: "image/jpeg" });
               alert('image successfully added')
-
             }, function(error) {
               // error
               alert('error uploading', error)
             });
-
         },
         function(error) {
           // error getting photos
@@ -59,7 +57,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   };
 
   $scope.takePicture = function() {
-    var options = {
+    let options = {
       quality: 100,
       destinationType: Camera.DestinationType.NATIVE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
@@ -72,31 +70,23 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
     };
 
     $cordovaCamera.getPicture(options)
-      .then(function(imageData) {
-          // confirm we are getting image back
-          alert('Image URI: ' + imageData);
-
+      .then(function(results) {
           // read the image into an array buffer since firebase likes blobs so get one with the cordova file plugin
-          let fileName = imageData.replace(/^.*[\\\/]/, '');
+          fileName = results.replace(/^.*[\\\/]/, '');
           // straight from cordova docs
           $cordovaFile.readAsArrayBuffer(cordova.file.tempDirectory, fileName)
             .then(function(success) {
               // success - get blob data
-              let imageBlob = new Blob([success], { type: "image/jpeg" });
-              $scope.imgURI = imageBlob;
-              alert('imageBlob', imageBlob);
-
-              saveToFirebase(imageBlob, fileName, function(_response) {
-                if (_response) {
-                  alert(_response.downloadURL)
-                }
-              })
+              imageBlob = new Blob([success], { type: "image/jpeg" });
+              alert('Image successfully added!');
             }, function(error) {
               // error
+              alert('error taking photo', error)
             });
         },
         function(error) {
           // error getting photos
+          alert('error getting photo', error)
         });
   };
 
