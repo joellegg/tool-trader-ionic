@@ -6,6 +6,11 @@
   font-size: 4em !important;
 }
 
+.logo {
+  font-family: 'Aclonica', sans-serif;
+  font-size: 3.5em;
+}
+
 .ion-settings:before {
   font-size: 4em;
 }
@@ -13,7 +18,8 @@
 .center {
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    display: flex;
+    justify-content: center
 }
 
 /*Buttons*/

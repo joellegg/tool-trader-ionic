@@ -5,6 +5,9 @@ factoryModule.factory('ToolsFactory', function($http) {
     },
     getUsers: () => {
       return $http.get('https://tool-trader.firebaseio.com/users.json').then(res => res.data);
+    },
+    newTool: (newTool) => {
+      $http.post('https://tool-trader.firebaseio.com/tools.json', newTool).then(console.log('success'));
     }
   }
 });

@@ -5,8 +5,7 @@
     <button class="button button-clear button-primary" ui-sref="authorize">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <form name="newUser" ng-submit="register()" novalidate>
-    <!-- add to ng-submit for form validation ===  newUser.$valid &&  -->
+    <form name="newUser" ng-submit="newUser.$valid && register()" novalidate>
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Email</span>
@@ -32,8 +31,6 @@
           <span class="input-label">Bio</span>
           <textarea type="text" ng-model="$parent.bio" name="bio" required></textarea>
         </label>
-        <!-- <div>{{data | json}}</div> -->
-        <!-- <input type="submit" value="register" ng-click="register()"> -->
         <div class="form-group">
           <button class="button button-full button-energized" type="submit">register</button>
         </div>

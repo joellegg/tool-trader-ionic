@@ -5,39 +5,53 @@
     <button class="button button-clear button-primary" ng-click="hideAddToolModal()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="list">
-
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Category
+    <form name="newTool" ng-submit="newTool.$valid && addTool()" novalidate>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Category
+          </div>
+          <select ng-model="$parent.category" required>
+            <option>Air Compressors, Tools & Accessories</option>
+            <option>Automotive</option>
+            <option>Hand Tools</option>
+            <option>Hardware</option>
+            <option>Power Tool Accessories</option>
+            <option>Power Tools</option>
+            <option>Safety & Security</option>
+            <option>Tool Storage</option>
+            <option>Welding & Soldering</option>
+            <option>Wet/Dry Vacuums</option>
+            <option>Workwear, Safety Gear & Equipment</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Tool</span>
+          <input ng-model="$parent.tool" type="text" required>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Condition
+          </div>
+          <select ng-model="$parent.condition" required>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Fair</option>
+            <option>Poor</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cost Per Day</span>
+          <input ng-model="$parent.price" type="number" min="0" step="1" required>
+        </label>
+        <div>
+          <!-- <img ng-show="imgURI" ng-src="{{imgURI}}">
+          <img ng-hide="imgURI" ng-src="http://placehold.it/100x100"> -->
+          <button class="button button-dark" ng-click="takePicture()">Take Picture</button>
+          <button class="button button-dark" ng-click="doGetPicture()">Upload Picture</button>
         </div>
-        <select>
-          <option selected>Category</option>
-          <option>Power Tool</option>
-          <option>Hand Tool</option>
-          <option>Machine</option>
-        </select>
-      </label>
-      <label class="item item-input">
-        <span class="input-label">tool</span>
-        <input ng-model="newTool.tool" type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">condition</span>
-        <input ng-model="newTool.condition" type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">cost per day</span>
-        <input ng-model="newTool.cost" type="text">
-      </label>
-      <div>
-        <img ng-show="imgURI" ng-src="{{imgURI}}">
-        <img ng-hide="imgURI" ng-src="http://placehold.it/100x100">
-        <button class="button button-dark" ng-click="takePicture()">Take Picture</button>
-        <button class="button button-dark" ng-click="doGetPicture()">Upload Picture</button>
+        <button class="button button-full button-energized" type="submit">Add Tool</button>
       </div>
-      <div>{{data | json}}</div>
-      <button class="button button-full button-energized" ng-click="addTool(newTool)">Add</button>
-    </div>
+    </form>
   </ion-content>
 </ion-modal-view>
