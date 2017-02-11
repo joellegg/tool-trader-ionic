@@ -110,30 +110,34 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
 
   $scope.addTool = function() {
     // alert('you is gonna add a tool')
+    console.log($scope, $scope.category)
+
     if (fileName === undefined) {
       return alert("Please upload or take an image of the tool.")
-    }
-    let uploadTask = storageRef.child(fileName).put(imageBlob);
+    };
+    return new Promise(function() {
+      let uploadTask = storageRef.child(fileName).put(imageBlob);
 
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
-    uploadTask.on('state_changed', function(snapshot) {
-      // Observe state change events such as progress, pause, and resume
-    }, function(error) {
-      // Handle unsuccessful uploads
-      alert(error.message)
-      _callback(null)
-    }, function() {
-      // Handle successful uploads on complete
-      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-      let toolImage = uploadTask.snapshot.downloadURL;
-      alert('toolImage download URL', toolImage)
-      imageResponse = toolImage;
+      // Register three observers:
+      // 1. 'state_changed' observer, called any time the state changes
+      // 2. Error observer, called on failure
+      // 3. Completion observer, called on successful completion
+      uploadTask.on('state_changed', function(snapshot) {
+        // Observe state change events such as progress, pause, and resume
+      }, function(error) {
+        // Handle unsuccessful uploads
+        alert(error.message)
+        _callback(null)
+      }, function() {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        let toolImage = uploadTask.snapshot.downloadURL;
+        alert(toolImage)
+        imageResponse = toolImage;
 
-      // when done pass back information on the saved image
-      // _callback(uploadTask.snapshot)
+        // when done pass back information on the saved image
+        // _callback(uploadTask.snapshot)
+      })
     }).then(() => {
       let newTool = {
         "category": $scope.category,
@@ -144,7 +148,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         "tool": $scope.tool
       };
       alert('newTool', newTool)
-      // ToolsFactory.newTool(newTool)
+        // ToolsFactory.newTool(newTool)
     });
   }
 

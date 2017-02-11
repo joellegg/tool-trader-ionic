@@ -11,7 +11,7 @@
           <div class="input-label">
             Category
           </div>
-          <select ng-model="$parent.category" required>
+          <select ng-model="category" required>
             <option>Air Compressors, Tools & Accessories</option>
             <option>Automotive</option>
             <option>Hand Tools</option>
@@ -27,13 +27,13 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Tool</span>
-          <input ng-model="$parent.tool" type="text" required>
+          <input ng-model="tool" type="text" required>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">
             Condition
           </div>
-          <select ng-model="$parent.condition" required>
+          <select ng-model="condition" required>
             <option>Excellent</option>
             <option>Good</option>
             <option>Fair</option>
@@ -42,7 +42,7 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Cost Per Day</span>
-          <input ng-model="$parent.price" type="number" min="0" step="1" required>
+          <input ng-model="price" type="number" min="0" step="1" required>
         </label>
         <div>
           <!-- <img ng-show="imgURI" ng-src="{{imgURI}}">
