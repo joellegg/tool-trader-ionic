@@ -5,13 +5,14 @@
     <button class="button button-clear button-primary" ng-click="hideAddToolModal()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <form name="newTool" ng-submit="newTool.$valid && addTool()" novalidate>
+    <form name="newTool" ng-submit="addTool()" novalidate>
+    <!-- newTool.$valid &&  -->
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             Category
           </div>
-          <select ng-model="category" required>
+          <select ng-model="modal.category" required>
             <option>Air Compressors, Tools & Accessories</option>
             <option>Automotive</option>
             <option>Hand Tools</option>
@@ -27,13 +28,13 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Tool</span>
-          <input ng-model="tool" type="text" required>
+          <input ng-model="modal.tool" type="text" required>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">
             Condition
           </div>
-          <select ng-model="condition" required>
+          <select ng-model="modal.condition" required>
             <option>Excellent</option>
             <option>Good</option>
             <option>Fair</option>
@@ -42,7 +43,7 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Cost Per Day</span>
-          <input ng-model="price" type="number" min="0" step="1" required>
+          <input ng-model="modal.price" type="number" min="0" step="1" required>
         </label>
         <div>
           <!-- <img ng-show="imgURI" ng-src="{{imgURI}}">

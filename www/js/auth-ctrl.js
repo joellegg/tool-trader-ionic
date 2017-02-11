@@ -1,7 +1,6 @@
 controllerModule.controller('AuthCtrl', function($scope, $location, AuthFactory) {
 
   $scope.register = () => {
-    console.log("So you want to register, eh?");
     console.log($scope, $scope.email, $scope.password, $scope.first, $scope.last, $scope.bio, $scope.dob)
     let newuid;
     AuthFactory.createUser($scope.email, $scope.password)
@@ -26,7 +25,7 @@ controllerModule.controller('AuthCtrl', function($scope, $location, AuthFactory)
   };
 
   $scope.login = () => {
-    console.log($scope, $scope.email, $scope.password);
+    // console.log($scope, $scope.email, $scope.password);
     AuthFactory.login($scope.email, $scope.password)
       .then(() => {
         $location.url('/home')

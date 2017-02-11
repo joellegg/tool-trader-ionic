@@ -109,20 +109,18 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   let storageRef = firebase.storage().ref();
 
   $scope.addTool = function() {
-    // alert('you is gonna add a tool')
-    console.log($scope, $scope.category)
-
+    // console.log($scope)
+    // if there is no image tell the user to add one
     if (fileName === undefined) {
       return alert("Please upload or take an image of the tool.")
     };
-    return new Promise(function() {
-      let uploadTask = storageRef.child(fileName).put(imageBlob);
+    let uploadTask = storageRef.child(fileName).put(imageBlob);
 
-      // Register three observers:
-      // 1. 'state_changed' observer, called any time the state changes
-      // 2. Error observer, called on failure
-      // 3. Completion observer, called on successful completion
-      uploadTask.on('state_changed', function(snapshot) {
+    // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on('state_changed', function(snapshot) {
         // Observe state change events such as progress, pause, and resume
       }, function(error) {
         // Handle unsuccessful uploads
@@ -138,18 +136,18 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         // when done pass back information on the saved image
         // _callback(uploadTask.snapshot)
       })
-    }).then(() => {
-      let newTool = {
-        "category": $scope.category,
-        "condition": $scope.condition,
-        "price": $scope.price,
-        "toolImage": imageResponse,
-        "owner": currentUser,
-        "tool": $scope.tool
-      };
-      alert('newTool', newTool)
-        // ToolsFactory.newTool(newTool)
-    });
+      .then(() => {
+        let newTool = {
+          "category": $scope.modal.category,
+          "condition": $scope.modal.condition,
+          "price": $scope.modal.price,
+          "toolImage": imageResponse,
+          "owner": currentUser,
+          "tool": $scope.modal.tool
+        };
+        alert('newTool', newTool)
+          // ToolsFactory.newTool(newTool)
+      });
   }
 
 
