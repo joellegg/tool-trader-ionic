@@ -143,6 +143,9 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         };
         ToolsFactory.newTool(newTool)
       })
+      .then(() => {
+        $location.url('/home')
+      })
       .catch(() => {
         alert('there must have been a problem')
       });
