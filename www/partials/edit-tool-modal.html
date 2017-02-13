@@ -5,55 +5,54 @@
     <button class="button button-clear button-primary" ng-click="hideEditModal()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <form name="newTool" ng-submit="editTool()" novalidate>
-    <!-- newTool.$valid &&  -->
+    <form name="editToolForm" ng-submit="editToolForm.$valid && editTool(editingTool.toolKey)" novalidate>
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             Category
           </div>
-          <select ng-model="modal1.category" required>
-            <option>Air Compressors, Tools & Accessories</option>
-            <option>Automotive</option>
-            <option>Hand Tools</option>
-            <option>Hardware</option>
-            <option>Power Tool Accessories</option>
-            <option>Power Tools</option>
-            <option>Safety & Security</option>
-            <option>Tool Storage</option>
-            <option>Welding & Soldering</option>
-            <option>Wet/Dry Vacuums</option>
-            <option>Workwear, Safety Gear & Equipment</option>
+          <select ng-model="editingTool.category" required>
+            <option ng-selected="editingTool.category === 'Air Compressors, Tools & Accessories'">Air Compressors, Tools & Accessories</option>
+            <option ng-selected="editingTool.category === 'Automotive'">Automotive</option>
+            <option ng-selected="editingTool.category === 'Hand Tools'">Hand Tools</option>
+            <option ng-selected="editingTool.category === 'Hardware'">Hardware</option>
+            <option ng-selected="editingTool.category === 'Power Tool Accessories'">Power Tool Accessories</option>
+            <option ng-selected="editingTool.category === 'Power Tools'">Power Tools</option>
+            <option ng-selected="editingTool.category === 'Safety & Security'">Safety & Security</option>
+            <option ng-selected="editingTool.category === 'Tool Storage'">Tool Storage</option>
+            <option ng-selected="editingTool.category === 'Welding & Soldering'">Welding & Soldering</option>
+            <option ng-selected="editingTool.category === 'Wet/Dry Vacuums'">Wet/Dry Vacuums</option>
+            <option ng-selected="editingTool.category === 'Workwear, Safety Gear & Equipment'">Workwear, Safety Gear & Equipment</option>
           </select>
         </label>
         <label class="item item-input">
           <span class="input-label">Tool</span>
-          <input ng-model="modal1.tool" type="text" required>
+          <input ng-model="editingTool.tool" type="text" required>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">
             Condition
           </div>
-          <select ng-model="modal1.condition" required>
-            <option>Excellent</option>
-            <option>Good</option>
-            <option>Fair</option>
-            <option>Poor</option>
+          <select ng-model="editingTool.condition" required>
+            <option ng-select="ediingTool.condition === Excellent">Excellent</option>
+            <option ng-select="ediingTool.condition === Good">Good</option>
+            <option ng-select="ediingTool.condition === Fair">Fair</option>
+            <option ng-select="ediingTool.condition === Poor">Poor</option>
           </select>
         </label>
         <label class="item item-input">
-          <span class="input-label">Cost Per Day</span>
-          <input ng-model="modal1.price" type="number" min="0" step="1" required>
+          <span class="input-label">Price Per Day</span>
+          <input ng-model="editingTool.price" type="number" min="0" step="1" required>
         </label>
         <div>
           <!-- <img ng-show="imgURI" ng-src="{{imgURI}}">
           <img ng-hide="imgURI" ng-src="http://placehold.it/100x100"> -->
-          <button class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take Picture</button>
-          <button class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload Picture</button>
+          <button class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take New Picture</button>
+          <button class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload New Picture</button>
         </div>
         <button class="button icon-left ion-edit button-full button-energized" type="submit">Update Tool Specs</button>
-        <button class="button icon-left ion-ios-trash button-full button-assertive" ng-click="deleteTool()">Remove From Tool Shed</button>
       </div>
     </form>
+      <button class="button icon-left ion-ios-trash button-full button-assertive" ng-click="deleteTool(editingTool.toolKey)">Remove From Tool Shed</button>
   </ion-content>
 </ion-modal-view>

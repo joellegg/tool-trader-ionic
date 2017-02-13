@@ -1,8 +1,11 @@
-controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory, $q) {
+controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $location, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory, $q) {
   $scope.tools = tools;
   $scope.currentUsersTools = [];
   let currentUser;
 
+  //////////////////////////////////////////////////////////
+  //////  get current user and assign them their tools  ////
+  //////////////////////////////////////////////////////////
   AuthFactory.getUser()
     .then((res) => {
       // console.log('current user is', res)
@@ -142,7 +145,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         ToolsFactory.newTool(newTool)
       })
       .then(() => {
-        $location.url('/home')
+        $scope.modal1.hide();
       })
       .catch(() => {
         alert('there must have been a problem')
@@ -152,33 +155,48 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   /////////////////////////////////////
   /////////  edit tool  ///////////////
   /////////////////////////////////////
-  $scope.editTool = function(toolsKey) {
-    console.log(toolsKey);
+  $scope.editingTool;
+  $scope.editThisTool = function(toolsKey) {
+    // console.log(toolsKey);
     $scope.modal2.show();
 
-    let editingTool;
     // use the toolsKey to find which tool to edit
-    for (key in $scope.tools) {
-      if (toolsKey === key) {
-        console.log('This is the tool you shall edit', toolsKey, key)
-          // make sure current user matches the tool owner
-        if (currentUser === $scope.tools[key].owner) {
+    for (let i = 0; i < $scope.currentUsersTools.length; i++) {
+      if (toolsKey === $scope.currentUsersTools[i].toolKey) {
+        // console.log('This is the tool you shall edit', toolsKey, $scope.currentUsersTools[i].toolKey)
+        // make sure current user matches the tool owner
+        if (currentUser === $scope.currentUsersTools[i].owner) {
           // get the tool specs and load to the page
-          editingTool = $scope.tools[key];
-          console.log('editingTool', editingTool)
+          $scope.editingTool = $scope.currentUsersTools[i];
+          // console.log('editingTool', $scope.editingTool);
         } else {
-          alert('There seems to be an error. Is this your tool?')
+          alert('There seems to be an error. Is this your tool?');
         }
       }
     }
-    // if user presses delete button the delete from firebase
-    // patch the updates to firebase
-    // switch back to home page
   };
-
-  $scope.hideEditModal = function() {
-    $scope.modal2.hide();
+  // patch the updates to firebase
+  $scope.editTool = function(toolsKey) {
+    console.log('push tool specs to firebase', toolsKey);
+    console.log($scope.editingTool);
+    ToolsFactory.updateTool(toolsKey, $scope.editingTool)
+      // switch back to home page
+      .then(() => {
+        $scope.modal2.hide();
+      });
   };
+  // if user presses delete button then delete from firebase
+  $scope.deleteTool = function(toolsKey) {
+    // get index of the tool in current users tools array and remove it
+    let pos = $scope.currentUsersTools.indexOf($scope.editingTool);
+    $scope.currentUsersTools.splice(pos, 1);
+    // remove the tool from firebase
+    ToolsFactory.removeTool(toolsKey)
+      // switch back to home page
+      .then(() => {
+        $scope.modal2.hide();
+      });
+  }
 
 
   /////////////////////////////////////
@@ -204,4 +222,9 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   $scope.hideAddToolModal = () => {
     $scope.modal1.hide()
   };
+
+  $scope.hideEditModal = function() {
+    $scope.modal2.hide();
+  };
+
 });

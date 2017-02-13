@@ -9,5 +9,11 @@ factoryModule.factory('ToolsFactory', function($http) {
     newTool: (newTool) => {
       $http.post('https://tool-trader.firebaseio.com/tools.json', newTool).then(alert("Tool successfully added!"));
     },
+    updateTool: (key, data) => {
+      return $http.patch(`https://tool-trader.firebaseio.com/tools/${key}.json`, data);
+    },
+    removeTool: (key) => {
+      return $http.delete(`https://tool-trader.firebaseio.com/tools/${key}.json`).then(alert("The tool has been removed from your shed."))
+    }
   }
 });
