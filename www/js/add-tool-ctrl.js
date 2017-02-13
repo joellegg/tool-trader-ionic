@@ -1,8 +1,7 @@
 controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory, $q) {
   $scope.tools = tools;
-  $scope.currentUsersTools;
+  $scope.currentUsersTools = [];
   let currentUser;
-  $scope.toolArray = [];
 
   AuthFactory.getUser()
     .then((res) => {
@@ -10,20 +9,15 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
       currentUser = res
     })
     .then(() => {
-      // console.log('tools', tools);
       for (key in $scope.tools) {
-        // console.log('tool key', key)
-        // console.log('tool owner', $scope.tools[key].owner)
         if (currentUser === $scope.tools[key].owner) {
-          // console.log('found match', currentUser, $scope.tools[key].owner)
-          $scope.currentUsersTools = $scope.tools;
-          // let bologna = ($scope.tools[key].tool).push();
-          // let toolArray = tools.push();
-          // console.log('toolArray', bologna)
-          // console.log('users tools', $scope.currentUsersTools)
+          $scope.tools[key].toolKey = key;
+          $scope.currentUsersTools.push($scope.tools[key]);
         }
       }
     })
+  // console.log('userTools', $scope.currentUsersTools)
+
 
   /////////////////////////////////////
   //////  TAKE OR GET PICTURES  ///////
