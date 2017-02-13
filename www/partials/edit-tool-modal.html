@@ -1,11 +1,11 @@
 <!-- Modal to add a new tool -->
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-energized">
-    <h1 class="title">Add to Tool Shed</h1>
-    <button class="button button-clear button-primary" ng-click="hideAddToolModal()">Cancel</button>
+    <h1 class="title">Tool Repair Shop</h1>
+    <button class="button button-clear button-primary" ng-click="hideEditModal()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <form name="newTool" ng-submit="addTool()" novalidate>
+    <form name="newTool" ng-submit="editTool()" novalidate>
     <!-- newTool.$valid &&  -->
       <div class="list">
         <label class="item item-input item-select">
@@ -51,7 +51,8 @@
           <button class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take Picture</button>
           <button class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload Picture</button>
         </div>
-        <button class="button icon-left ion-ios-plus button-full button-energized" type="submit">Add Tool</button>
+        <button class="button icon-left ion-edit button-full button-energized" type="submit">Update Tool Specs</button>
+        <button class="button icon-left ion-ios-trash button-full button-assertive" ng-click="deleteTool()">Remove From Tool Shed</button>
       </div>
     </form>
   </ion-content>

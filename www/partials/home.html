@@ -13,7 +13,7 @@
         </button>
       </div>
       <div class="col-25 padding-5" ng-repeat="(key, value) in currentUsersTools">
-        <img class="toolPics" ng-src="{{ value.toolImage }}">
+        <img class="toolPics" ng-click="editTool(value.toolKey)" ng-src="{{ value.toolImage }}">
       </div>
     </div>
     <h2>Rental History</h2>

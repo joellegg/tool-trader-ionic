@@ -16,7 +16,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         }
       }
     })
-  // console.log('userTools', $scope.currentUsersTools)
+    // console.log('userTools', $scope.currentUsersTools)
 
 
   /////////////////////////////////////
@@ -132,12 +132,12 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
     uploadImage()
       .then(() => {
         let newTool = {
-          "category": $scope.modal.category,
-          "condition": $scope.modal.condition,
-          "price": $scope.modal.price,
+          "category": $scope.modal1.category,
+          "condition": $scope.modal1.condition,
+          "price": $scope.modal1.price,
           "toolImage": imageResponse,
           "owner": currentUser,
-          "tool": $scope.modal.tool
+          "tool": $scope.modal1.tool
         };
         ToolsFactory.newTool(newTool)
       })
@@ -149,21 +149,59 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
       });
   }
 
+  /////////////////////////////////////
+  /////////  edit tool  ///////////////
+  /////////////////////////////////////
+  $scope.editTool = function(toolsKey) {
+    console.log(toolsKey);
+    $scope.modal2.show();
+
+    let editingTool;
+    // use the toolsKey to find which tool to edit
+    for (key in $scope.tools) {
+      if (toolsKey === key) {
+        console.log('This is the tool you shall edit', toolsKey, key)
+          // make sure current user matches the tool owner
+        if (currentUser === $scope.tools[key].owner) {
+          // get the tool specs and load to the page
+          editingTool = $scope.tools[key];
+          console.log('editingTool', editingTool)
+        } else {
+          alert('There seems to be an error. Is this your tool?')
+        }
+      }
+    }
+    // if user presses delete button the delete from firebase
+    // patch the updates to firebase
+    // switch back to home page
+  };
+
+  $scope.hideEditModal = function() {
+    $scope.modal2.hide();
+  };
 
 
   /////////////////////////////////////
   /////////  MODALS  //////////////////
   /////////////////////////////////////
   $ionicModal.fromTemplateUrl('partials/add-tool-modal.html', {
+    id: 1,
     scope: $scope
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.modal1 = modal;
+  });
+  $ionicModal.fromTemplateUrl('partials/edit-tool-modal.html', {
+    id: 2,
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal2 = modal;
   });
 
+
   $scope.showAddToolModal = () => {
-    $scope.modal.show()
+    $scope.modal1.show()
   };
   $scope.hideAddToolModal = () => {
-    $scope.modal.hide()
+    $scope.modal1.hide()
   };
 });

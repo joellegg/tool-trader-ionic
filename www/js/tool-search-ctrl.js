@@ -7,4 +7,8 @@ controllerModule.controller('ToolSearchCtrl', function($scope, $location, tools,
     $scope.toolsData.push($scope.tools[key]);
   }
   console.log('toolsData', $scope.toolsData);
+
+  $scope.clearSearch = function () {
+    $scope.search = '';
+  }
 })
