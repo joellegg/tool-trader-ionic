@@ -27,26 +27,20 @@
 /*Buttons*/
 
 .squareAdd {
-  height: 6em;
+  height: 5em;
+  width: 100%;
 }
 
 
 /*Rows*/
 
+.padding-5 {
+  padding: 0.5%;
+}
 .gallery {
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-}
-
-.col-24 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 24%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 24%;
-  -ms-flex: 0 0 24%;
-  flex: 0 0 24%;
-  max-width: 24%;
 }
 
 .gallery > .col {
@@ -57,5 +51,5 @@
 .toolPics {
   width: 100%;
   height: auto;
-  max-height: 8em;
+  max-height: 6em;
 }
