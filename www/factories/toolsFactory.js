@@ -8,6 +8,6 @@ factoryModule.factory('ToolsFactory', function($http) {
     },
     newTool: (newTool) => {
       $http.post('https://tool-trader.firebaseio.com/tools.json', newTool).then(alert("Tool successfully added!"));
-    }
+    },
   }
 });

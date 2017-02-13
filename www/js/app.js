@@ -48,7 +48,12 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     .state('search', {
       url: "/search",
       templateUrl: "partials/tool-search.html",
-      controller: "ToolSearchCtrl"
+      controller: "ToolSearchCtrl",
+      resolve: {
+        tools(ToolsFactory) {
+          return ToolsFactory.getTools();
+        }
+      }
     })
     .state('tabs', {
       cache: false,
