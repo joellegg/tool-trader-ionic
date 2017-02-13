@@ -1,5 +1,6 @@
 /* Empty. Add your own CSS if you like */
 
+
 /* AUTH PAGE*/
 
 #logo {
@@ -16,17 +17,17 @@
 }
 
 .center {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center
 }
+
 
 /*Buttons*/
 
 .squareAdd {
-  height: 4em;
-  margin: 1%;
+  height: 6em;
 }
 
 
@@ -36,6 +37,16 @@
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.col-24 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 24%;
+  -ms-flex: 0 0 24%;
+  flex: 0 0 24%;
+  max-width: 24%;
 }
 
 .gallery > .col {

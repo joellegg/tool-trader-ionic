@@ -2,6 +2,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
   $scope.tools = tools;
   $scope.currentUsersTools;
   let currentUser;
+  $scope.toolArray = [];
 
   AuthFactory.getUser()
     .then((res) => {
@@ -16,6 +17,9 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $cordov
         if (currentUser === $scope.tools[key].owner) {
           // console.log('found match', currentUser, $scope.tools[key].owner)
           $scope.currentUsersTools = $scope.tools;
+          // let bologna = ($scope.tools[key].tool).push();
+          // let toolArray = tools.push();
+          // console.log('toolArray', bologna)
           // console.log('users tools', $scope.currentUsersTools)
         }
       }

@@ -45,8 +45,12 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/register.html",
       controller: "AuthCtrl"
     })
-
-  .state('tabs', {
+    .state('search', {
+      url: "/search",
+      templateUrl: "partials/tool-search.html",
+      controller: "ToolSearchCtrl"
+    })
+    .state('tabs', {
       cache: false,
       url: "/tab",
       abstract: true,
