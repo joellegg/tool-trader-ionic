@@ -71,3 +71,13 @@
 .noMargin {
   margin: 0;
 }
+
+.search-button-margin {
+  margin-right: 1em;
+}
+
+.search-form {
+  background-color: #B3B3B3;
+  padding: 2%;
+  border-radius: 10px;
+}

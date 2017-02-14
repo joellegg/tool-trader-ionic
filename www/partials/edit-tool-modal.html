@@ -48,9 +48,9 @@
           <button class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take New Picture</button>
           <button class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload New Picture</button>
         </div> -->
+        <button type="button" class="button icon-left ion-ios-trash button-full button-assertive" ng-click="deleteTool(editingTool.toolKey)">Remove From Tool Shed</button>
         <button class="button icon-left ion-edit button-full button-energized" type="submit">Update Tool Specs</button>
       </div>
     </form>
-      <button class="button icon-left ion-ios-trash button-full button-assertive" ng-click="deleteTool(editingTool.toolKey)">Remove From Tool Shed</button>
   </ion-content>
 </ion-modal-view>

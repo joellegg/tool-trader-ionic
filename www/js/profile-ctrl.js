@@ -5,7 +5,7 @@ controllerModule.controller('ProfileCtrl', function($scope, $location, AuthFacto
 
   AuthFactory.getUser()
     .then((res) => {
-      console.log(res)
+      // console.log(res)
       currentUser = res
     }).then(() => {
       ToolsFactory.getUsers()
@@ -21,7 +21,6 @@ controllerModule.controller('ProfileCtrl', function($scope, $location, AuthFacto
         }).then(() => {
           let date = new Date($scope.userProfile.dob)
           $scope.date = date.toDateString();
-          console.log(date.toDateString())
         })
     })
 

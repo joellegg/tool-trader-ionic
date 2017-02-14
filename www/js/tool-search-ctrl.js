@@ -6,9 +6,18 @@ controllerModule.controller('ToolSearchCtrl', function($scope, $location, tools,
     $scope.tools[key].toolKey = key;
     $scope.toolsData.push($scope.tools[key]);
   }
-  console.log('toolsData', $scope.toolsData);
 
-  $scope.clearSearch = function () {
+  $scope.clearSearch = () => {
     $scope.search = '';
+  }
+
+
+  ////////////////////////////////////////
+  ////////  SEARCH FOR A TOOL  ///////////
+  ////////////////////////////////////////
+  $scope.search = [];
+  $scope.searchForTool = () => {
+    console.log('Begin tool search')
+    console.log($scope.search)
   }
 })

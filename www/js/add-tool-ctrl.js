@@ -255,7 +255,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
   $scope.hideAddToolModal = () => {
     $scope.modal1.hide()
   };
-
   $scope.hideEditModal = function() {
     $scope.modal2.hide();
   };
