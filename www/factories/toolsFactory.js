@@ -1,4 +1,6 @@
 factoryModule.factory('ToolsFactory', function($http) {
+  let searchParams = [];
+
   return {
     getTools: () => {
       return $http.get('https://tool-trader.firebaseio.com/tools.json').then(res => res.data);
@@ -14,6 +16,12 @@ factoryModule.factory('ToolsFactory', function($http) {
     },
     removeTool: (key) => {
       return $http.delete(`https://tool-trader.firebaseio.com/tools/${key}.json`).then(alert("The tool has been removed from your shed."))
+    },
+    setSearchParams: (data) => {
+      searchParams = data;
+    },
+    getSearchParams: () => {
+      return searchParams;
     }
   }
 });

@@ -1,17 +1,17 @@
 <!-- Search bar for tools to rent -->
 <ion-view title="Search Results">
+
   <ion-header-bar class="bar bar-energized bar-header item-input-inset">
-    <label class="item-input-wrapper">
-      <i class="icon ion-ios-search placeholder-icon"></i>
-      <input type="search" placeholder="Search" ng-model="search">
-    </label>
-    <button class="button button-clear button-primary" ui-sref="tabs.home" ng-click="clearSearch()">Cancel</button>
+    <button class="button ion-ios-arrow-back button-clear button-primary" ui-sref="search"></button>
+    <h1 class="title">Search Results</h1>
+    <button class="button button-clear button-primary" ui-sref="tabs.home">Home</button>
   </ion-header-bar>
+
   <ion-content class="padding">
     <h1>Search Form</h1>
-    <div class="searchContainer" ng-repeat="(key, value) in toolsData | filter:search | limitTo:10 ">
+    <div class="searchContainer" ng-repeat="(key, value) in toolsData | limitTo:10 ">
       <div class="col-25">
-        <img class="toolPics" ng-src="{{ value.toolImage }}">
+        <img class="toolPics" ng-click="reserve(value.toolKey)" ng-src="{{ value.toolImage }}">
       </div>
       <div class="col-75 column1">
         <div class="column2">
