@@ -1,7 +1,7 @@
 <!-- Modal to add a new tool -->
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-energized">
-    <h1 class="title">Tool Repair Shop</h1>
+    <h1 class="title">Repair Shop</h1>
     <button class="button button-clear button-primary" ng-click="hideEditModal()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
@@ -44,12 +44,10 @@
           <span class="input-label">Price Per Day</span>
           <input ng-model="editingTool.price" type="number" min="0" step="1" required>
         </label>
-        <div>
-          <!-- <img ng-show="imgURI" ng-src="{{imgURI}}">
-          <img ng-hide="imgURI" ng-src="http://placehold.it/100x100"> -->
+        <!-- <div>
           <button class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take New Picture</button>
           <button class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload New Picture</button>
-        </div>
+        </div> -->
         <button class="button icon-left ion-edit button-full button-energized" type="submit">Update Tool Specs</button>
       </div>
     </form>

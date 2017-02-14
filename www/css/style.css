@@ -53,3 +53,21 @@
   height: auto;
   max-height: 6em;
 }
+
+/* SEARCH PAGE */
+.searchContainer {
+  display: flex;
+}
+.column1 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1%;
+}
+.column2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.noMargin {
+  margin: 0;
+}

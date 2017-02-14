@@ -8,12 +8,18 @@
     <button class="button button-clear button-primary" ui-sref="tabs.home" ng-click="clearSearch()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="gallery" ng-repeat="(key, value) in toolsData | filter:search | limitTo:10 ">
-      <img class="col-25 toolPics" ng-src="{{ value.toolImage }}">
-      <h3>{{ value.tool }}</h3>
-      <h4>{{ value.condition }}</h4>
-      <!-- <h4>{{ value.owner }}</h4> -->
-      <h4>{{ value.price }}</h4>
+    <div class="searchContainer" ng-repeat="(key, value) in toolsData | filter:search | limitTo:10 ">
+      <div class="col-25">
+        <img class="toolPics" ng-src="{{ value.toolImage }}">
+      </div>
+      <div class="col-75 column1">
+        <div class="column2">
+          <h3 class="noMargin">{{ value.tool }}</h3>
+          <h4 class="noMargin">owner rating</h4>
+        </div>
+        <h5 class="noMargin">Condition: {{ value.condition }}</h5>
+        <h5 class="noMargin">Price per day: {{ value.price }}$</h5>
+      </div>
     </div>
   </ion-content>
 </ion-view>

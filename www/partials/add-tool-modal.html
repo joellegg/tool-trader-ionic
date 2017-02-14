@@ -46,10 +46,8 @@
           <input ng-model="modal1.price" type="number" min="0" step="1" required>
         </label>
         <div>
-          <!-- <img ng-show="imgURI" ng-src="{{imgURI}}">
-          <img ng-hide="imgURI" ng-src="http://placehold.it/100x100"> -->
-          <button class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take Picture</button>
-          <button class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload Picture</button>
+          <button type="button" class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take Picture</button>
+          <button type="button" class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload Picture</button>
         </div>
         <button class="button icon-left ion-ios-plus button-full button-energized" type="submit">Add Tool</button>
       </div>

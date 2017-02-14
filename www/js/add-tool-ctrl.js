@@ -91,7 +91,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
         });
   };
 
-
   ////////////////////////////////////
   ////////  UPLOAD TO FIREBASE  //////
   ////////////////////////////////////
@@ -131,6 +130,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
       }
     })
   };
+
   $scope.addTool = function() {
     uploadImage()
       .then(() => {
@@ -153,9 +153,45 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
   }
 
   /////////////////////////////////////
-  /////////  edit tool  ///////////////
+  /////////  EDIT TOOL  ///////////////
   /////////////////////////////////////
   $scope.editingTool;
+
+  // update the image on firebase if the user chooses to update the image
+  function updateImage() {
+    // console.log($scope)
+    return $q(function(resolve, reject) {
+      // if there is no image tell the user to add one
+      if (fileName === undefined) {
+        return alert("Please upload or take an image of the tool.")
+      } else {
+        let uploadTask = storageRef.child(fileName).put(imageBlob);
+
+        // Register three observers:
+        // 1. 'state_changed' observer, called any time the state changes
+        // 2. Error observer, called on failure
+        // 3. Completion observer, called on successful completion
+        uploadTask.on('state_changed', function(snapshot) {
+          // Observe state change events such as progress, pause, and resume
+        }, function(error) {
+          // Handle unsuccessful uploads
+          alert(error.message)
+          _callback(null)
+        }, function() {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          let toolImage = uploadTask.snapshot.downloadURL;
+          alert(toolImage)
+          resolve(imageResponse = toolImage)
+
+          // when done pass back information on the saved image
+          // _callback(uploadTask.snapshot)
+        })
+      }
+    })
+  };
+
+  // show the edit modal with the correct tool content
   $scope.editThisTool = function(toolsKey) {
     // console.log(toolsKey);
     $scope.modal2.show();

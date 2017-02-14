@@ -5,7 +5,7 @@
     <button class="button button-clear button-primary" ui-sref="authorize">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <form name="newUser" ng-submit="newUser.$valid && register()" novalidate>
+    <form name="newUser" ng-submit="register()" novalidate>
     <!-- newUser.$valid &&  -->
       <div class="list">
         <label class="item item-input">
@@ -32,6 +32,10 @@
           <span class="input-label">Bio</span>
           <textarea type="text" ng-model="$parent.bio" name="bio" required></textarea>
         </label>
+        <div>
+          <button type="button" class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take Profile Picture</button>
+          <button type="button" class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload Profile Picture</button>
+        </div>
         <div class="form-group">
           <button class="button button-full button-energized" type="submit">register</button>
         </div>
