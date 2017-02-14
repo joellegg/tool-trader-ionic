@@ -121,11 +121,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           let toolImage = uploadTask.snapshot.downloadURL;
-          alert(toolImage)
           resolve(imageResponse = toolImage)
-
-          // when done pass back information on the saved image
-          // _callback(uploadTask.snapshot)
         })
       }
     })
@@ -142,7 +138,8 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
           "owner": currentUser,
           "tool": $scope.modal1.tool
         };
-        ToolsFactory.newTool(newTool)
+        $scope.currentUsersTools.push(newTool);
+        ToolsFactory.newTool(newTool);
       })
       .then(() => {
         $scope.modal1.hide();
