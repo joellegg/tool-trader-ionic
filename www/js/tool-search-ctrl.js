@@ -17,18 +17,29 @@ controllerModule.controller('ToolSearchCtrl', function($scope, $location, tools,
   ////////////////////////////////////////
   $scope.search = [];
 
+  // search.tool
+  // search.condition
+  // search.maxPrice
+  // search.pickup
+  // search.return
+
   $scope.searchForTool = () => {
-    console.log($scope.search);
+    console.log('searchparams', $scope.search);
+    console.log('toolsData', $scope.toolsData)
     ToolsFactory.setSearchParams($scope.search);
     // filter the tools to match what is available using for loops and pushing to an array
     for (let i = 0; i < $scope.toolsData.length; i++) {
-      if ($scope.search.tool == $scope.toolsData.tool) {
-        console.log('found a match', $scope.search.tool, $scope.toolsData.tool)
+      // search based on the tool
+      if ($scope.search.tool && ($scope.search.tool).toLowerCase() === ($scope.toolsData[i].tool).toLowerCase()) {
+        // then search on all other variables
+        if ($scope.search.maxPrice && ($scope.search.maxPrice >= $scope.toolsData[i].price)) {
+          console.log("and it's cheap!");
+          // filter to the available tools based on reservations
+        }
       }
     }
     // push the results through the factory so they're available in the results view
-    console.log($scope.toolsData)
-    // $location.url('/results');
+    $location.url('/results');
   };
 
   $scope.reserve = (toolKey) => {
