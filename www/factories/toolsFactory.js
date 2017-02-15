@@ -1,5 +1,6 @@
 factoryModule.factory('ToolsFactory', function($http) {
   let searchParams = [];
+  let availableTools = [];
 
   return {
     getTools: () => {
@@ -22,6 +23,15 @@ factoryModule.factory('ToolsFactory', function($http) {
     },
     getSearchParams: () => {
       return searchParams;
+    },
+    setAvailableTools: (tools) => {
+      availableTools = tools;
+    },
+    getAvailableTools: () => {
+      return availableTools;
+    }
+    addReservation: (key, reservation) => {
+      return $http.post(`https://tool-trader.firebaseio.com/tools/${key}/reserved.json`, reservation)
     }
   }
 });
