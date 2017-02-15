@@ -45,10 +45,10 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     .state('results', {
       url: "/results",
       templateUrl: "partials/search-results.html",
-      controller: "ToolSearchCtrl",
+      controller: "ResultsSearchCtrl",
       resolve: {
-        tools(ToolsFactory) {
-          return ToolsFactory.getTools();
+        availableTools(ToolsFactory) {
+          return ToolsFactory.getAvailableTools();
         }
       }
     })

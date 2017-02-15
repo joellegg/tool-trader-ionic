@@ -8,18 +8,17 @@
   </ion-header-bar>
 
   <ion-content class="padding">
-    <h1>Search Form</h1>
-    <div class="searchContainer" ng-repeat="(key, value) in toolsData | limitTo:10 ">
+    <div class="searchContainer" ng-repeat="tool in availableTools | limitTo:10 ">
       <div class="col-25">
-        <img class="toolPics" ng-click="reserve(value.toolKey)" ng-src="{{ value.toolImage }}">
+        <img class="toolPics" ng-click="reserve(tool.toolKey)" ng-src="{{ tool.toolImage }}">
       </div>
       <div class="col-75 column1">
         <div class="column2">
-          <h3 class="noMargin">{{ value.tool }}</h3>
+          <h3 class="noMargin">{{ tool.tool }}</h3>
           <h4 class="noMargin">owner rating</h4>
         </div>
-        <h5 class="noMargin">Condition: {{ value.condition }}</h5>
-        <h5 class="noMargin">Price per day: {{ value.price }}$</h5>
+        <h5 class="noMargin">Condition: {{ tool.condition }}</h5>
+        <h5 class="noMargin">Price per day: {{ tool.price }}$</h5>
       </div>
     </div>
   </ion-content>

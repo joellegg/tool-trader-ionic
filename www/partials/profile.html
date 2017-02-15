@@ -4,7 +4,7 @@
     <button class="button button-clear button-primary" ng-click="logout()">logout</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <img ng-src="http://placehold.it/100x100">
+    <img ng-src="{{ userProfile.profilePic }}">
     <h3>{{userProfile.firstName}}</h3>
     <h3>{{userProfile.lastName}}</h3>
     <h3>{{userProfile.email}}</h3>

@@ -1,6 +1,7 @@
 factoryModule.factory('ToolsFactory', function($http) {
   let searchParams = [];
   let availableTools = [];
+  let userKey;
 
   return {
     getTools: () => {
@@ -9,6 +10,12 @@ factoryModule.factory('ToolsFactory', function($http) {
     getUsers: () => {
       return $http.get('https://tool-trader.firebaseio.com/users.json').then(res => res.data);
     },
+    setUserKey: (userKeyNow) => {
+      userKey = userKeyNow;
+    },
+    getUserKey: () => {
+      return userKey;
+    },
     newTool: (newTool) => {
       $http.post('https://tool-trader.firebaseio.com/tools.json', newTool).then(alert("Tool successfully added!"));
     },
@@ -16,7 +23,7 @@ factoryModule.factory('ToolsFactory', function($http) {
       return $http.patch(`https://tool-trader.firebaseio.com/tools/${key}.json`, data);
     },
     removeTool: (key) => {
-      return $http.delete(`https://tool-trader.firebaseio.com/tools/${key}.json`).then(alert("The tool has been removed from your shed."))
+      return $http.delete(`https://tool-trader.firebaseio.com/tools/${key}.json`).then(alert("The tool has been removed from your shed."));
     },
     setSearchParams: (data) => {
       searchParams = data;
@@ -29,9 +36,12 @@ factoryModule.factory('ToolsFactory', function($http) {
     },
     getAvailableTools: () => {
       return availableTools;
-    }
-    addReservation: (key, reservation) => {
-      return $http.post(`https://tool-trader.firebaseio.com/tools/${key}/reserved.json`, reservation)
+    },
+    toolAddReservation: (key, reservation) => {
+      return $http.post(`https://tool-trader.firebaseio.com/tools/${key}/reserved.json`, reservation);
+    },
+    userNewReservation: (user, reservation) => {
+      $http.post(`https://tool-trader.firebaseio.com/users/${user}/reservations.json`, reservation);
     }
   }
 });

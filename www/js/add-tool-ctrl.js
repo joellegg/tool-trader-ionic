@@ -1,6 +1,7 @@
 controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $location, $cordovaCamera, $cordovaImagePicker, $cordovaFile, tools, user, ToolsFactory, AuthFactory, $q) {
   $scope.tools = tools;
   $scope.currentUsersTools = [];
+  $scope.userRentals = [];
   let currentUser;
 
   //////////////////////////////////////////////////////////
@@ -8,7 +9,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
   //////////////////////////////////////////////////////////
   AuthFactory.getUser()
     .then((res) => {
-      // console.log('current user is', res)
       currentUser = res
     })
     .then(() => {
@@ -18,6 +18,30 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
           $scope.currentUsersTools.push($scope.tools[key]);
         }
       }
+    })
+    // get users reservations
+    .then(() => {
+      ToolsFactory.getUsers()
+        .then((users) => {
+          // loop through all users to find the current user
+          for (key in users) {
+            if (currentUser === users[key].uid) {
+              ToolsFactory.setUserKey(key);
+              // loop through each reservation to get the toolKey
+              for (key1 in users[key].reservations) {
+                // loop through each tool to get the toolKey
+                for (key2 in $scope.tools) {
+                  // if there is a match between the toolKeys then push the tool into an array
+                  if (users[key].reservations[key1].tool === key2) {
+                    console.log('found the match');
+                    $scope.userRentals.push($scope.tools[key2]);
+                  }
+                }
+              }
+            }
+          }
+          console.log("users rentals", $scope.userRentals)
+        })
     })
     // console.log('userTools', $scope.currentUsersTools)
 

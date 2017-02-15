@@ -8,7 +8,7 @@ controllerModule.controller('ToolSearchCtrl', function($scope, $location, tools,
   }
 
   $scope.clearSearch = () => {
-    $scope.search = '';
+    $scope.search = [];
   }
 
 

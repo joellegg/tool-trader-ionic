@@ -16,6 +16,11 @@
         <img class="toolPics" ng-click="editThisTool(value.toolKey)" ng-src="{{ value.toolImage }}">
       </div>
     </div>
-    <h2>Rental History</h2>
+    <h2>Rentals</h2>
+    <div class="gallery">
+      <div class="col-25 padding-5" ng-repeat="(key, value) in userRentals">
+        <img class="toolPics" ng-src="{{ value.toolImage }}">
+      </div>
+    </div>
   </ion-content>
 </ion-view>
