@@ -37,21 +37,21 @@ controllerModule.controller('ToolSearchCtrl', function($scope, $location, tools,
           // if the pickup date is after the reserved dropoff date OR
           // if the dropoff date is before the reserved pickup date
           if ($scope.search.pickup > new Date($scope.toolsData[i].reserved[reservationKey].dropoff) || $scope.search.dropoff < new Date($scope.toolsData[i].reserved[reservationKey].pickup)) {
-            console.log('reservation does not conflict')
+            // console.log('reservation does not conflict')
           } else {
             isReserved = true
           }
         }
         if (!isReserved) {
-          console.log($scope.toolsData[i].toolKey, ' tool is available');
+          // console.log($scope.toolsData[i].toolKey, ' tool is available');
           // if the user enters a max price then use it to filter otherwise skip it
           if ($scope.search.maxPrice && ($scope.search.maxPrice >= $scope.toolsData[i].price)) {
             availableTools.push($scope.toolsData[i])
-            console.log("and it's in your budget!");
+            // console.log("and it's in your budget!");
           } else if (!$scope.search.maxPrice) {
             availableTools.push($scope.toolsData[i])
           }
-          console.log('available tools', availableTools)
+          // console.log('available tools', availableTools)
         }
       }
     }
@@ -59,20 +59,4 @@ controllerModule.controller('ToolSearchCtrl', function($scope, $location, tools,
     ToolsFactory.setAvailableTools(availableTools);
     $location.url('/results');
   };
-
-  $scope.reserve = (toolKey) => {
-    let searchParams = ToolsFactory.getSearchParams();
-    let availableTools = ToolsFactory.getAvailableTools();
-
-    let reservation = {
-      "pickup": searchParams.pickup,
-      "dropoff": searchParams.dropoff
-    };
-    // post reservation dates to the tool
-    ToolsFactory.addReservation(toolKey, reservation)
-      .then(() => {
-        alert(toolKey, " successfully added ", reservation)
-      });
-    // post tool and dates to user profile
-  }
 });

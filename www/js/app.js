@@ -8,6 +8,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+const messageRef = firebase.database().ref('messages');
+
 
 let controllerModule = angular.module('starter.controllers', [])
 let factoryModule = angular.module('starter.factories', [])
@@ -88,7 +90,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url: "/groups",
       views: {
         'groups-tab': {
-          templateUrl: "partials/groups.html"
+          templateUrl: "partials/groups.html",
+          controller: "MessageCtrl"
         }
       }
     })

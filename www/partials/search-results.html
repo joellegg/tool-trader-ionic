@@ -10,7 +10,8 @@
   <ion-content class="padding">
     <div class="searchContainer" ng-repeat="tool in availableTools | limitTo:10 ">
       <div class="col-25">
-        <img class="toolPics" ng-click="reserve(tool.toolKey)" ng-src="{{ tool.toolImage }}">
+        <img class="toolPics" ng-click="showPopup(tool.toolKey, tool.owner)" ng-src="{{ tool.toolImage }}">
+        <!-- reserve(tool.toolKey) -->
       </div>
       <div class="col-75 column1">
         <div class="column2">
