@@ -33,14 +33,13 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
                 for (key2 in $scope.tools) {
                   // if there is a match between the toolKeys then push the tool into an array
                   if (users[key].reservations[key1].tool === key2) {
-                    console.log('found the match');
                     $scope.userRentals.push($scope.tools[key2]);
                   }
                 }
               }
             }
           }
-          console.log("users rentals", $scope.userRentals)
+          // console.log("users rentals", $scope.userRentals)
         })
     })
     // console.log('userTools', $scope.currentUsersTools)

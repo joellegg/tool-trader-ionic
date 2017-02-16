@@ -1,0 +1,18 @@
+<ion-view view-title="Messages">
+  <ion-header-bar class="bar bar-header bar-energized">
+    <button class="button ion-ios-arrow-back button-clear button-primary" ui-sref="tabs.groups"></button>
+    <h1 class="title">Group Title</h1>
+    <button class="button button-clear button-primary ion-ios-compose navbar-icons-large" ng-click="compose()"></button>
+  </ion-header-bar>
+  <ion-content class="padding has-header">
+    <h1>Message view</h1>
+  </ion-content>
+  <ion-footer-bar keyboard-attach class="bar-stable item-input-inset bar-energized">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Message..." on-return="sendMessage(); closeKeyboard()" ng-model="message" on-focus="inputUp(); scroll()" on-blur="inputDown()" />
+    </label>
+    <button class="button button-clear" ng-click="addMessage(message, name, band, userArray[0].image)">
+      Send
+    </button>
+  </ion-footer-bar>
+</ion-view>

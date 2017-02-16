@@ -81,3 +81,15 @@
   padding: 2%;
   border-radius: 10px;
 }
+.bar-energized .button.button-clear {
+ font-size: 18px;
+}
+.navbar-icons-large {
+  font-size: 25px !important;
+}
+
+/* MESSAGE-MAIN */
+.message-inline {
+  display: flex;
+  justify-content: space-between;
+}

@@ -52,15 +52,20 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('messages', {
+      url: "/messages",
+      templateUrl: "partials/message-portal.html",
+      controller: "MessageCtrl"
+    })
     .state('tabs', {
       cache: false,
       url: "/tab",
       abstract: true,
       templateUrl: "partials/tabs.html",
       resolve: {
-        user(AuthFactory, $location) {
+        user(AuthFactory, $state) {
           return AuthFactory.getUser().catch(() => {
-            $location.url('/authorize')
+            $state.go('authorize')
           })
         }
       }
@@ -79,11 +84,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('tabs.messages', {
-      url: "/messages",
+    .state('tabs.groups', {
+      url: "/groups",
       views: {
-        'messages-tab': {
-          templateUrl: "partials/messages.html"
+        'groups-tab': {
+          templateUrl: "partials/groups.html"
         }
       }
     })
