@@ -51,6 +51,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         availableTools(ToolsFactory) {
           return ToolsFactory.getAvailableTools();
+        },
+        user(AuthFactory, $state) {
+          return AuthFactory.getUser().catch(() => {
+            $state.go('authorize')
+          })
         }
       }
     })
