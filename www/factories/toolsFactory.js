@@ -13,9 +13,6 @@ factoryModule.factory('ToolsFactory', function($http) {
     setUserKey: (userKeyNow) => {
       userKey = userKeyNow;
     },
-    getUserKey: () => {
-      return userKey;
-    },
     newTool: (newTool) => {
       $http.post('https://tool-trader.firebaseio.com/tools.json', newTool).then(alert("Tool successfully added!"));
     },
@@ -41,7 +38,7 @@ factoryModule.factory('ToolsFactory', function($http) {
       return $http.post(`https://tool-trader.firebaseio.com/tools/${key}/reserved.json`, reservation);
     },
     userNewReservation: (user, reservation) => {
-      $http.post(`https://tool-trader.firebaseio.com/users/${user}/reservations.json`, reservation);
+      return $http.post(`https://tool-trader.firebaseio.com/users/${user}/reservations.json`, reservation);
     }
   }
 });

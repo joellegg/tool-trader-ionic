@@ -1,7 +1,8 @@
-controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $ionicPopup, availableTools, AuthFactory, ToolsFactory) {
+controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $ionicPopup, $q, availableTools, AuthFactory, ToolsFactory) {
   $scope.availableTools = availableTools;
+  let userUID = AuthFactory.getUserId();
 
-  let userKey = ToolsFactory.getUserKey();
+  // let userKey = ToolsFactory.getUserKey();
 
   if ($scope.availableTools.length === 0) {
     alert('No tools match your search')
@@ -31,7 +32,7 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
         text: 'message owner',
         type: 'button-energized',
         onTap: function() {
-          messageOwner();
+          messageOwner(toolOwner);
         }
       }, {
         text: 'cancel',
@@ -40,7 +41,7 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
     });
   };
 
-  function reserve (toolKey) {
+  function reserve(toolKey) {
     let searchParams = ToolsFactory.getSearchParams();
 
     let reservation = {
@@ -51,11 +52,16 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
     ToolsFactory.toolAddReservation(toolKey, reservation);
     // post tool and dates to user profile
     let userRes = {
-        "tool": toolKey,
-        "pickup": searchParams.pickup,
-        "dropoff": searchParams.dropoff
-      }
-      ToolsFactory.userNewReservation(userKey, userRes);
-      $location.url('/tab/home')
-  }
+      "tool": toolKey,
+      "pickup": searchParams.pickup,
+      "dropoff": searchParams.dropoff
+    }
+
+    AuthFactory.getUserKey(userUID).then((key) => {
+      console.log("response", key)
+      ToolsFactory.userNewReservation(key, userRes).then(() => {
+        $location.url('/tab/home')
+      });
+    })
+  };
 });

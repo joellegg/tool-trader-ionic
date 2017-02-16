@@ -25,6 +25,20 @@ factoryModule.factory('AuthFactory', ($q, $http) => {
           }
         }); //end const unsubscribe
       }); //end return getUser
-    } //end getUser
+    }, //end getUser
+    // get user key straight from firebase
+    getUserId() {
+      return firebase.auth().currentUser.uid
+    },
+    getUserKey: (uid) => {
+      return $http.get(`https://tool-trader.firebaseio.com/users.json?orderBy="uid"&equalTo="${uid}"`).then((res) => {
+        res = res.data;
+        let responseKey;
+        for (key in res) {
+          responseKey = key;
+        }
+        return responseKey;
+      })
+    }
   };
 }); //end AuthFactory
