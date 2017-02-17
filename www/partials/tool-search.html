@@ -13,7 +13,7 @@
 
         <label class="item item-input">
           <span class="input-label">Tool</span>
-          <input ng-model="search.tool" type="text" required>
+          <input ng-model="search.tool" type="text" class="form-right-align" required>
         </label>
 
         <!-- <label class="item item-input item-select">
@@ -29,18 +29,18 @@
         </label> -->
 
         <label class="item item-input">
-          <span class="input-label">Max Price per Day</span>
-          <input ng-model="search.maxPrice" type="number">
+          <span class="input-label">Max $/Day</span>
+          <input ng-model="search.maxPrice" type="number" class="form-right-align">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Pickup</span>
-          <input type="date" ng-model="search.pickup" name="pickup" required>
+          <input type="date" ng-model="search.pickup" name="pickup" class="form-right-align" required>
         </label>
 
         <label class="item item-input">
           <span class="input-label">Return</span>
-          <input type="date" ng-model="search.dropoff" name="dropoff" required>
+          <input type="date" ng-model="search.dropoff" name="dropoff" class="form-right-align" required>
         </label>
 
       </ion-list>
