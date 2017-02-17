@@ -64,4 +64,7 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
       });
     })
   };
+  function messageOwner(toolOwner) {
+    console.log("So you want to message the tool owner", toolOwner)
+  }
 });

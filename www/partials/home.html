@@ -18,7 +18,7 @@
     </div>
     <h2>Rentals</h2>
     <div class="gallery">
-      <div class="col-25 padding-5" ng-repeat="(key, value) in userRentals">
+      <div class="col-25 padding-5" ng-repeat="(key, value) in userRentals track by $index">
         <img class="toolPics" ng-src="{{ value.toolImage }}">
       </div>
     </div>
