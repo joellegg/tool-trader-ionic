@@ -45,6 +45,6 @@ factoryModule.factory('ToolsFactory', function($http) {
         };
         return userTools;
       })
-    }
+    },
   }
 });

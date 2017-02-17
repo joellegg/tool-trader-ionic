@@ -8,11 +8,29 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
   //////  get current users id and assign them their tools  ////
   //////////////////////////////////////////////////////////
 
-  let uid = AuthFactory.getUserId();
-  // assign user their tools
-  ToolsFactory.getUsersTools(uid).then((res) => {
-    console.log('response', res)
-  });
+  // let uid = AuthFactory.getUserId();
+  // // get users tools
+  // ToolsFactory.getUsersTools(uid)
+  //   .then((res) => {
+  //     console.log('response', res)
+  //     $scope.currentUsersTools = res;
+  //   })
+  //   // get users reservations
+  //   .then(() => {
+  //     console.log('something else');
+  //     // grab user profile then reservations
+  //     AuthFactory.getUserReservations(uid).then((res) => {
+  //       // console.log('reservations response', res);
+  //       let reservations = res;
+  //       for (key in reservations) {
+  //         console.log(key, reservations[key]);
+  //         // make a call for each key to firebase to get the tool and push into array -- more important for millions of pieces of data
+  //       }
+  //       // $scope.userRentals.push($scope.tools[key2]);
+  //     });
+  //   });
+
+
 
   AuthFactory.getUser()
     .then((res) => {

@@ -39,6 +39,17 @@ factoryModule.factory('AuthFactory', ($q, $http) => {
         }
         return responseKey;
       })
+    },
+    getUserReservations(uid) {
+      return $http.get(`https://tool-trader.firebaseio.com/users.json?orderBy="uid"&equalTo="${uid}"`).then((res) => {
+        let profile = res.data;
+        let reservations = {};
+        for (key in profile) {
+          // console.log(profile[key].reservations);
+          reservations = profile[key].reservations;
+        }
+        return reservations;
+      })
     }
   };
 }); //end AuthFactory
