@@ -5,12 +5,20 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
   let currentUser;
 
   //////////////////////////////////////////////////////////
-  //////  get current user and assign them their tools  ////
+  //////  get current users id and assign them their tools  ////
   //////////////////////////////////////////////////////////
+
+  let uid = AuthFactory.getUserId();
+  // assign user their tools
+  ToolsFactory.getUsersTools(uid).then((res) => {
+    console.log('response', res)
+  });
+
   AuthFactory.getUser()
     .then((res) => {
       currentUser = res
     })
+    // assign user their tools
     .then(() => {
       for (key in $scope.tools) {
         if (currentUser === $scope.tools[key].owner) {
@@ -23,10 +31,9 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
     .then(() => {
       ToolsFactory.getUsers()
         .then((users) => {
-          // loop through all users to find the current user
+          // loop through all users to find the current user's key
           for (key in users) {
             if (currentUser === users[key].uid) {
-              ToolsFactory.setUserKey(key);
               // loop through each reservation to get the toolKey
               for (key1 in users[key].reservations) {
                 // loop through each tool to get the toolKey

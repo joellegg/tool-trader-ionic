@@ -2,8 +2,6 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
   $scope.availableTools = availableTools;
   let userUID = AuthFactory.getUserId();
 
-  // let userKey = ToolsFactory.getUserKey();
-
   if ($scope.availableTools.length === 0) {
     alert('No tools match your search')
     $location.url('/search')
