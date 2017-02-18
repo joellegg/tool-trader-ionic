@@ -63,11 +63,11 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
   };
 
   function messageOwner(toolOwner, toolKey) {
-    console.log('tool owner', toolOwner, ' current user', userUID, 'subject toolkey', toolKey);
     // variables
     let subject = {};
     let timeStamp = new Date();
-    console.log(timeStamp)
+    let groupID = "";
+
 
     // get tool name as the subject
     ToolsFactory.getToolName(toolKey)
@@ -79,15 +79,20 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
           "subject": subject,
           "toolKey": toolKey,
           "timeStamp": timeStamp
-        }
+        };
         MessageFactory.makeNewGroup(newGroup).then((res) => {
-          console.log(res.data.name)
+          groupID = res.data.name;
+        }).then(() => {
+          let userMember = {
+            "member": userUID
+          };
+          let ownerMember = {
+            "member": toolOwner
+          };
+          MessageFactory.addUserToGroup(groupID, userMember);
+          MessageFactory.addUserToGroup(groupID, ownerMember);
         })
       })
-
-    // create new message group
-    // pass current user and tool owner into the members array
-
     // switch to message view and pass in variables
   }
 });
