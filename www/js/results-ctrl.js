@@ -1,4 +1,4 @@
-controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $ionicPopup, $q, availableTools, AuthFactory, ToolsFactory) {
+controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $ionicPopup, $q, availableTools, AuthFactory, ToolsFactory, MessageFactory) {
   $scope.availableTools = availableTools;
   let userUID = AuthFactory.getUserId();
 
@@ -30,7 +30,7 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
         text: 'message owner',
         type: 'button-energized',
         onTap: function() {
-          messageOwner(toolOwner);
+          messageOwner(toolOwner, toolKey);
         }
       }, {
         text: 'cancel',
@@ -56,14 +56,38 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
     }
 
     AuthFactory.getUserKey(userUID).then((key) => {
-      console.log("response", key)
       ToolsFactory.userNewReservation(key, userRes).then(() => {
         $location.url('/tab/home')
       });
     })
   };
 
-  function messageOwner(toolOwner) {
-    console.log("So you want to message the tool owner", toolOwner)
+  function messageOwner(toolOwner, toolKey) {
+    console.log('tool owner', toolOwner, ' current user', userUID, 'subject toolkey', toolKey);
+    // variables
+    let subject = {};
+    let timeStamp = new Date();
+    console.log(timeStamp)
+
+    // get tool name as the subject
+    ToolsFactory.getToolName(toolKey)
+      .then((res) => {
+        subject = res;
+      }).then(() => {
+        // console.log("new message subject", subject)
+        let newGroup = {
+          "subject": subject,
+          "toolKey": toolKey,
+          "timeStamp": timeStamp
+        }
+        MessageFactory.makeNewGroup(newGroup).then((res) => {
+          console.log(res.data.name)
+        })
+      })
+
+    // create new message group
+    // pass current user and tool owner into the members array
+
+    // switch to message view and pass in variables
   }
 });
