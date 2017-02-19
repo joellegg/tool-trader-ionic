@@ -96,9 +96,14 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'groups-tab': {
           templateUrl: "partials/groups.html",
-          controller: "MessageCtrl"
+          controller: "GroupCtrl"
         }
       }
+      // resolve: {
+      //   groups(MessageFactory) {
+      //     return MessageFactory.getUsersGroups();
+      //   }
+      // }
     })
     .state('tabs.profile', {
       url: "/profile",
