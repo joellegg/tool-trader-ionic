@@ -4,9 +4,15 @@
     <button id="logout" class="button button-clear button-primary" ng-click="logout()">logout</button>
   </ion-header-bar>
   <ion-content class="padding">
-    <img ng-src="{{ userProfile.profilePic }}">
-    <h3>{{userProfile.firstName}}</h3>
-    <h3>{{userProfile.lastName}}</h3>
+    <div class="row">
+      <div class="col-50">
+        <img class="profilePic" ng-src="{{ userProfile.profilePic }}">
+      </div>
+      <div>
+        <h3>{{userProfile.firstName}}</h3>
+        <h3>{{userProfile.lastName}}</h3>
+      </div>
+    </div>
     <h3>{{userProfile.email}}</h3>
     <h2>{{ date }}</h2>
     <h2>bio</h2>

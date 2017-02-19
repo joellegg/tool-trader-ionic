@@ -108,3 +108,8 @@
 {
     display: block;
 }
+
+/* PROFILE */
+.profilePic {
+  width: 100%;
+}
