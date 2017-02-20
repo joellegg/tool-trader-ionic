@@ -1,6 +1,27 @@
 controllerModule.controller('GroupCtrl', function($scope, $location, MessageFactory, AuthFactory, $q) {
+  let userGroups = {};
+  $scope.usersChats = [];
+
   // get users chat groups
-  var userGroups = messageRef.child('currentuser')
+  AuthFactory.getUserKey(AuthFactory.getUserId())
+    .then((key) => {
+      userGroups = userRef.child(key + '/groups');
+    })
+    // listen for new groups added
+    .then(() => {
+      userGroups.on('child_added', (snapshot, prevChildKey) => {
+        console.log('child_added', snapshot.key);
+        // get details of each group member is a part of
+        MessageFactory.getChatGroups(snapshot.key).then((response) => {
+          $scope.usersChats.push(response);
+          console.log($scope.usersChats);
+        })
+      })
+    })
+
+  // get group details using the snapshot.key
+
+
 
   // get message groups for current user
   messageRef.on('child_added', (snapshot, prevChildKey) => {
@@ -20,7 +41,7 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
   //     })
   // })
 
-  MessageFactory.getUsersGroups("Drill").then((res) => {
-    console.log(res)
-  })
+  // MessageFactory.getUsersGroups("Drill").then((res) => {
+  //   console.log(res)
+  // })
 })

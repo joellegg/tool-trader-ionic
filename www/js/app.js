@@ -8,7 +8,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// firebase realtime
 const messageRef = firebase.database().ref('messages');
+const userRef = firebase.database().ref('users');
 
 
 let controllerModule = angular.module('starter.controllers', [])
