@@ -2,7 +2,14 @@ controllerModule.controller('MessageCtrl', function($scope, $location, AuthFacto
 
   let currentUser;
 
-  AuthFactory.getUser().then((res) => { currentUser = res })
+  AuthFactory.getUser().then((res) => { currentUser = res });
+  // get message groups for current user
+  // messageRef.on('child_added', (snapshot, prevChildKey) => {
+  //   console.log('child_added', snapshot.val(), prevChildKey);
+  //   // get chats user is part of
+  //   // loop through members then chats
+
+  // })
 
   $scope.newMessage = {};
 

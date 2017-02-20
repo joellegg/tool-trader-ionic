@@ -50,6 +50,14 @@ factoryModule.factory('AuthFactory', ($q, $http) => {
         }
         return reservations;
       })
+    },
+    getRecipientInfo(uid) {
+      return $http.get(`https://tool-trader.firebaseio.com/users.json?orderBy="uid"&equalTo="${uid}"`).then((res) => {
+        let profile = res.data;
+        for (key in profile) {
+          return profile[key];
+        }
+      })
     }
   };
 }); //end AuthFactory

@@ -64,22 +64,26 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
 
   function messageOwner(toolOwner, toolKey) {
     // variables
-    let subject = {};
-    let timeStamp = new Date();
+    let subject = "";
     let groupID = "";
+    let chatImage = "";
+    let recipient = "";
+    let timeStamp = new Date();
 
 
     // get tool name as the subject
-    ToolsFactory.getToolName(toolKey)
+    ToolsFactory.getTool(toolKey)
       .then((res) => {
-        subject = res;
+        subject = res.tool;
+        chatImage = res.toolImage;
       })
       .then(() => {
         // create chat
         let newGroup = {
           "subject": subject,
           "toolKey": toolKey,
-          "timeStamp": timeStamp
+          "timeStamp": timeStamp,
+          "chatImage" : chatImage
         };
         MessageFactory.makeNewGroup(newGroup)
           // assign user to group key (key from posting chat)
@@ -107,6 +111,8 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
                 [groupID]: true,
               }
               MessageFactory.addGroupToUser(key, group);
+            }).then(() => {
+              $location.url(`/messages/${groupID}`)
             });
           })
       })

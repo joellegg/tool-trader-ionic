@@ -46,15 +46,8 @@ factoryModule.factory('ToolsFactory', function($http) {
         return userTools;
       })
     },
-    getToolName: (toolKey) => {
-      return $http.get(`https://tool-trader.firebaseio.com/tools/${toolKey}.json`).then((res) => {
-        let response = res.data.tool;
-        return response;
-        // for (key in response) {
-        //   console.log('response tool name', response[key].tool);
-        //   console.log(key, response)
-        // }
-      })
+    getTool: (toolKey) => {
+      return $http.get(`https://tool-trader.firebaseio.com/tools/${toolKey}.json`).then(res => res.data)
     }
   }
 });

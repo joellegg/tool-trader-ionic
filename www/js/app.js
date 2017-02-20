@@ -62,7 +62,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('messages', {
-      url: "/messages",
+      url: "/messages/:chatgroup",
       templateUrl: "partials/message-portal.html",
       controller: "MessageCtrl"
     })
