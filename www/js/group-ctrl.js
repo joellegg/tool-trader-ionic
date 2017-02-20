@@ -1,9 +1,13 @@
 controllerModule.controller('GroupCtrl', function($scope, $location, MessageFactory, AuthFactory, $q) {
+  // get users chat groups
+  var userGroups = messageRef.child('currentuser')
+
   // get message groups for current user
-  messageRef.on('child_added', (childSnapshot, prevChildKey) => {
-    console.log('child_added');
-    console.log(childSnapshot, prevChildKey)
-    // get new message-groups and add to the list
+  messageRef.on('child_added', (snapshot, prevChildKey) => {
+    console.log('child_added', snapshot.val(), prevChildKey);
+    // get chats user is part of
+    // loop through members then chats
+
   })
 
   // currentGamesRef.on('child_added', () => {

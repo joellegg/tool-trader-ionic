@@ -73,26 +73,43 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
     ToolsFactory.getToolName(toolKey)
       .then((res) => {
         subject = res;
-      }).then(() => {
-        // console.log("new message subject", subject)
+      })
+      .then(() => {
+        // create chat
         let newGroup = {
           "subject": subject,
           "toolKey": toolKey,
           "timeStamp": timeStamp
         };
-        MessageFactory.makeNewGroup(newGroup).then((res) => {
-          groupID = res.data.name;
-        }).then(() => {
-          let userMember = {
-            "member": userUID
-          };
-          let ownerMember = {
-            "member": toolOwner
-          };
-          MessageFactory.addUserToGroup(groupID, userMember);
-          MessageFactory.addUserToGroup(groupID, ownerMember);
-        })
+        MessageFactory.makeNewGroup(newGroup)
+          // assign user to group key (key from posting chat)
+          .then((res) => {
+            groupID = res.data.name;
+          })
+          .then(() => {
+            let members = {
+              [userUID]: true,
+              [toolOwner]: true
+            };
+            MessageFactory.addUserToGroup(groupID, members);
+          })
+          // add group to user
+          .then(() => {
+            // need the key of the user and toolowner
+            AuthFactory.getUserKey(userUID).then((key) => {
+              let group = {
+                [groupID]: true,
+              }
+              MessageFactory.addGroupToUser(key, group);
+            });
+            AuthFactory.getUserKey(toolOwner).then((key) => {
+              let group = {
+                [groupID]: true,
+              }
+              MessageFactory.addGroupToUser(key, group);
+            });
+          })
       })
-    // switch to message view and pass in variables
+      // switch to message view and pass in variables
   }
 });
