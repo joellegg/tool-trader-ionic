@@ -1,6 +1,7 @@
-controllerModule.controller('MessageCtrl', function($scope, $location, AuthFactory, ToolsFactory) {
+controllerModule.controller('MessageCtrl', function($scope, $location, $stateParams, AuthFactory, ToolsFactory) {
 
   let currentUser;
+  console.log($stateParams.chatgroup)
 
   AuthFactory.getUser().then((res) => { currentUser = res });
   // get message groups for current user
@@ -11,18 +12,14 @@ controllerModule.controller('MessageCtrl', function($scope, $location, AuthFacto
 
   // })
 
-  $scope.newMessage = {};
-
   $scope.addMessage = () => {
-    // console.log("add the message");
     let timeStamp = new Date();
-
     $scope.newMessage = {
+      // "chat": chatGroup,
       "message": $scope.message,
       "author": currentUser,
-      "timeStamp": timeStamp,
+      "timeStamp": timeStamp
     }
-
     console.log('new message', $scope.newMessage);
   }
 });
