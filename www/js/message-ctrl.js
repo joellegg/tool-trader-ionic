@@ -1,25 +1,35 @@
 controllerModule.controller('MessageCtrl', function($scope, $location, $stateParams, AuthFactory, ToolsFactory) {
 
-  let currentUser;
-  console.log($stateParams.chatgroup)
+  $scope.currentUser;
+  let chatGroup = $stateParams.chatgroup;
+  $scope.messages = [];
 
-  AuthFactory.getUser().then((res) => { currentUser = res });
+  AuthFactory.getUser().then((res) => { $scope.currentUser = res });
+
   // get message groups for current user
-  // messageRef.on('child_added', (snapshot, prevChildKey) => {
-  //   console.log('child_added', snapshot.val(), prevChildKey);
-  //   // get chats user is part of
-  //   // loop through members then chats
-
-  // })
+  messageRef.on('child_added', (snapshot, prevChildKey) => {
+    console.log('child_added', snapshot.val(), snapshot.key);
+    // get messages related to the current chat room
+    if (snapshot.val().chat === chatGroup) {
+      // add to array
+      let message = snapshot.val();
+      message.key = snapshot.key;
+      $scope.messages.push(message)
+    }
+    console.log($scope.messages)
+  })
 
   $scope.addMessage = () => {
-    let timeStamp = new Date();
+    // let timeStamp = new Date();
     $scope.newMessage = {
-      // "chat": chatGroup,
+      "chat": chatGroup,
       "message": $scope.message,
-      "author": currentUser,
-      "timeStamp": timeStamp
+      "author": $scope.currentUser,
+      "timeStamp": (new Date()).toISOString(),
     }
     console.log('new message', $scope.newMessage);
+
+    messageRef.push($scope.newMessage);
+    $scope.message = '';
   }
 });

@@ -1,5 +1,5 @@
 controllerModule.controller('GroupCtrl', function($scope, $location, MessageFactory, AuthFactory, $q) {
-  let currentUid = AuthFactory.getUserId();
+  $scope.currentUid = AuthFactory.getUserId();
 
   let userGroups = {};
   let chatImage = {};
@@ -8,7 +8,7 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
 
 
   // get users chat groups
-  AuthFactory.getUserKey(currentUid)
+  AuthFactory.getUserKey($scope.currentUid)
     .then((key) => {
       userGroups = userRef.child(key + '/groups');
     })
@@ -27,7 +27,7 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
               for (user in res) {
                 // console.log(user);
                 // get the first name of the members that are not the current user
-                if (user !== currentUid) {
+                if (user !== $scope.currentUid) {
                   AuthFactory.getRecipientInfo(user).then((res) => {
                     // console.log(res.firstName, res.lastName);
                     response.name = res.firstName + ' ' + res.lastName;
