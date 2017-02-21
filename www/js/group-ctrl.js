@@ -47,19 +47,7 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
     $location.url(`/messages/${groupKey}`)
   }
 
+  // update chat time stamp for users groups
+  // chatRef.on()
 
-
-  // currentGamesRef.on('child_added', () => {
-  //   console.log("child_added")
-  //   LiveGamesFactory.getCurrentGameList()
-  //     .then((gameList) => {
-  //       $scope.currentGames = gameList
-  //         // $scope.selectedGame = $scope.gameNameList[0]
-  //       $scope.$apply()
-  //     })
-  // })
-
-  // MessageFactory.getUsersGroups("Drill").then((res) => {
-  //   console.log(res)
-  // })
 })
