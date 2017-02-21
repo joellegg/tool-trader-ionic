@@ -39,9 +39,9 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
           })
       })
     })
-    .then(() => {
-      console.log($scope.usersChats)
-    })
+    // .then(() => {
+    //   console.log($scope.usersChats)
+    // })
 
   $scope.changeRoute = (groupKey) => {
     $location.url(`/messages/${groupKey}`)
