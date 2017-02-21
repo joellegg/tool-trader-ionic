@@ -5,9 +5,9 @@
   </ion-header-bar>
 
   <ion-content class="padding">
-
-    <div class="card" ng-repeat="message in messages">
-      <div class="item item-text-wrap" ng-class="{ green: currentUser == message.author }">
+    <!-- <div ng-class="$variableToEvaluate ? 'class-if-true' : 'class-if-false'"> -->
+    <div ng-repeat="message in messages" ng-class="currentUser == message.author ? 'userMessage' : 'notUserMessage' ">
+      <div class="item item-text-wrap" ng-class="currentUser == message.author ? 'userMessage-style': 'notUserMessage-style' ">
         {{message.message}}
       </div>
     </div>

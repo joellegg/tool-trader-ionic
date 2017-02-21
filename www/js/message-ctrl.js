@@ -8,7 +8,7 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
 
   // get message groups for current user
   messageRef.on('child_added', (snapshot, prevChildKey) => {
-    console.log('child_added', snapshot.val(), snapshot.key);
+    // console.log('child_added', snapshot.val(), snapshot.key);
     // get messages related to the current chat room
     if (snapshot.val().chat === chatGroup) {
       // add to array
@@ -16,7 +16,8 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
       message.key = snapshot.key;
       $scope.messages.push(message)
     }
-    console.log($scope.messages)
+    $scope.$apply();
+    // console.log($scope.messages)
   })
 
   $scope.addMessage = () => {
@@ -27,9 +28,10 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
       "author": $scope.currentUser,
       "timeStamp": (new Date()).toISOString(),
     }
-    console.log('new message', $scope.newMessage);
+    // console.log('new message', $scope.newMessage);
 
     messageRef.push($scope.newMessage);
+    // $scope.$apply();
     $scope.message = '';
   }
 });
