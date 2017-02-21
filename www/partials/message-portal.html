@@ -1,7 +1,7 @@
 <ion-view view-title="Messages">
   <ion-header-bar class="bar bar-header bar-energized">
     <button class="button ion-ios-arrow-back button-clear button-primary" ui-sref="tabs.groups"></button>
-    <h1 class="title">Group Title</h1>
+    <h1 class="title">Messages</h1>
   </ion-header-bar>
 
   <ion-content class="padding">
@@ -15,11 +15,13 @@
   </ion-content>
 
   <ion-footer-bar keyboard-attach class="bar-stable item-input-inset bar-energized">
-    <label class="item-input-wrapper">
-      <input type="text" placeholder="Message..." on-return="sendMessage(); closeKeyboard()" ng-model="message" on-focus="inputUp(); scroll()" on-blur="inputDown()" />
-    </label>
-    <button class="button button-clear" ng-click="addMessage(message)">
-      Send
-    </button>
+    <!-- <form ng-submit=""> -->
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="Message..." on-return="addMessage(message); closeKeyboard()" ng-model="message" on-focus="inputUp(); scroll()" on-blur="inputDown()" />
+      </label>
+      <button class="button button-clear" ng-click="addMessage(message)">
+        Send
+      </button>
+    <!-- </form> -->
   </ion-footer-bar>
 </ion-view>

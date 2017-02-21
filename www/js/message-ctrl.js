@@ -16,8 +16,11 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
       message.key = snapshot.key;
       $scope.messages.push(message)
     }
-    $ionicScrollDelegate.scrollBottom(true);
-    $scope.$apply();
+
+    $timeout(() => {
+      $ionicScrollDelegate.scrollBottom(true);
+      $scope.$apply()
+    })
   })
 
   $scope.addMessage = () => {
@@ -31,6 +34,6 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
     currentChat.set((new Date()).toISOString());
     messageRef.push($scope.newMessage);
 
-    $timeout(() => $scope.message = '')
+    $scope.message = ''
   }
 });
