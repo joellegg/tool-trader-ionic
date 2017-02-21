@@ -17,7 +17,7 @@ const chatRef = firebase.database().ref('chats');
 let controllerModule = angular.module('starter.controllers', [])
 let factoryModule = angular.module('starter.factories', [])
 
-let myApp = angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starter.factories'])
+let myApp = angular.module('ionicApp', ['ionic', 'ngCordova', 'starter.controllers', 'starter.factories', 'ui.rCalendar'])
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
 
