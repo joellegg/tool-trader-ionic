@@ -1,17 +1,18 @@
 <ion-view title="Calendar">
-  <ion-header-bar class="bar bar-header bar-energized">
-    <h1 class="title">Reservations</h1>
-  </ion-header-bar>
-  <ion-content class="has-header">
-    <calendar calendar-mode="mode" event-source="eventSource">
-    <div class="card">
-      <div class="item item-divider">
-        <p>Beer O' clock</p>
-      </div>
-      <div class="item item-text-wrap">
-        <p>Sit back, relax, and drink a beer!</p>
-        <strong>When: date</strong>
-      </div>
+  <ion-header-bar class="bar-energized bar bar-header disable-user-behavior" align-title="left">
+    <div class="title title-left header-item">{{viewTitle}}</div>
+    <div class="buttons buttons-right">
+      <span class="right-buttons">
+        <button class="button" ng-disabled="isToday()" ng-click="today()">Today</button>
+        <button class="button" ng-click="changeMode('month')">M</button>
+        <button class="button" ng-click="changeMode('week')">W</button>
+        <button class="button" ng-click="changeMode('day')">D</button>
+        <!-- <button class="button" ng-click="loadEvents()">Load Events</button> -->
+      </span>
     </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <calendar ng-model="calendar.currentDate" calendar-mode="calendar.mode" event-source="events" range-changed="reloadSource(startTime, endTime)" event-selected="onEventSelected(event)" title-changed="onViewTitleChanged(title)" time-selected="onTimeSelected(selectedTime, events, disabled)" step="30"></calendar>
   </ion-content>
 </ion-view>

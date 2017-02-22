@@ -121,7 +121,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url: "/calendar",
       views: {
         'calendar-tab': {
-          templateUrl: "partials/calendar.html"
+          templateUrl: "partials/calendar.html",
+          controller: 'CalendarCtrl'
         }
       }
     });
