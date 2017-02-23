@@ -1,17 +1,41 @@
 controllerModule.controller('CalendarCtrl', function($scope, $location, MessageFactory, AuthFactory, $q) {
   'use strict';
   $scope.calendar = {};
+  // $scope.events = [];
+  $scope.calendar.eventSource = []
 
-  // get reservations from users -- missing reservations for tool owners
-  // change the event names in each template
-  // get tool name
+
+  // get reservations from users profile
+  AuthFactory.getUserKey(AuthFactory.getUserId()).then((userKey) => {
+      let userReservations = userRef.child(userKey + '/reservations');
+      userReservations.on('child_added', (snapshot, prevChildKey) => {
+        $scope.calendar.eventSource.push({
+          startTime: new Date(snapshot.val().pickup),
+          endTime: new Date(snapshot.val().dropoff),
+          title: snapshot.val().tool,
+          allDay: false
+        })
+        console.log('scope events', $scope.calendar.eventSource);
+        $scope.$broadcast('eventSourceChanged', $scope.calendar.eventSource)
+        $scope.$apply()
+        // debugger
+      })
+    })
+    // console.log('scope events', $scope.events)
+    // get tool reservation and add to owners calendar
+    // change the event names in each template
+    // get tool name
 
   $scope.changeMode = function(mode) {
     $scope.calendar.mode = mode;
   };
 
   $scope.loadEvents = function() {
-    $scope.calendar.eventSource = createRandomEvents();
+    setTimeout(() => {
+      $scope.calendar.eventSource = createRandomEvents()
+      $scope.$broadcast('eventSourceChanged', $scope.calendar.eventSource)
+      $scope.$apply()
+    }, 1000)
   };
 
   $scope.onEventSelected = function(event) {
@@ -40,6 +64,7 @@ controllerModule.controller('CalendarCtrl', function($scope, $location, MessageF
   };
 
   function createRandomEvents() {
+
     var events = [];
     for (var i = 0; i < 50; i += 1) {
       var date = new Date();
@@ -75,5 +100,7 @@ controllerModule.controller('CalendarCtrl', function($scope, $location, MessageF
     }
     return events;
   }
+
+
 
 })

@@ -1,7 +1,7 @@
 controllerModule.controller('MessageCtrl', function($scope, $location, $stateParams, $ionicScrollDelegate, $cordovaKeyboard, AuthFactory, ToolsFactory, $timeout) {
   $cordovaKeyboard.disableScroll(true)
 
-  $scope.currentUser;
+  // $scope.currentUser;
   let chatGroup = $stateParams.chatgroup;
   $scope.messages = [];
 
@@ -25,7 +25,6 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
   })
 
   $scope.addMessage = () => {
-    // let timeStamp = new Date();
     $scope.newMessage = {
       "chat": chatGroup,
       "message": $scope.message,
