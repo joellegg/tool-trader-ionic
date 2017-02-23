@@ -1,12 +1,13 @@
 controllerModule.controller('MessageCtrl', function($scope, $location, $stateParams, $ionicScrollDelegate, $cordovaKeyboard, AuthFactory, ToolsFactory, $timeout) {
-  $cordovaKeyboard.disableScroll(true)
+  // $cordovaKeyboard.disableScroll(true)
 
   // $scope.currentUser;
   let chatGroup = $stateParams.chatgroup;
   $scope.messages = [];
 
   AuthFactory.getUser().then((res) => { $scope.currentUser = res });
-  let currentChat = chatRef.child(chatGroup + '/timeStamp');
+  let chatTimeStamp = chatRef.child(chatGroup + '/timeStamp');
+  let chatLastMessage = chatRef.child(chatGroup + '/lastMessage')
 
   // get message groups for current user
   messageRef.on('child_added', (snapshot, prevChildKey) => {
@@ -31,7 +32,10 @@ controllerModule.controller('MessageCtrl', function($scope, $location, $statePar
       "author": $scope.currentUser,
       "timeStamp": (new Date()).toISOString()
     }
-    currentChat.set((new Date()).toISOString());
+    chatTimeStamp.set((new Date()).toISOString());
+    let postLast = $scope.message.substring(0, 30);
+    chatLastMessage.set(postLast);
+
     messageRef.push($scope.newMessage);
 
     $scope.message = ''

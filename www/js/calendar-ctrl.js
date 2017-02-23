@@ -1,4 +1,4 @@
-controllerModule.controller('CalendarCtrl', function($scope, $location, MessageFactory, AuthFactory, $q) {
+controllerModule.controller('CalendarCtrl', function($scope, $location, MessageFactory, AuthFactory, ToolsFactory, $q) {
   'use strict';
   $scope.calendar = {};
   // $scope.events = [];
@@ -7,35 +7,36 @@ controllerModule.controller('CalendarCtrl', function($scope, $location, MessageF
 
   // get reservations from users profile
   AuthFactory.getUserKey(AuthFactory.getUserId()).then((userKey) => {
-      let userReservations = userRef.child(userKey + '/reservations');
-      userReservations.on('child_added', (snapshot, prevChildKey) => {
+    let userReservations = userRef.child(userKey + '/reservations');
+    userReservations.on('child_added', (snapshot, prevChildKey) => {
+      // get tool name
+      ToolsFactory.getTool(snapshot.val().tool).then((tool) => {
+        // console.log(tool.tool)
         $scope.calendar.eventSource.push({
           startTime: new Date(snapshot.val().pickup),
-          endTime: new Date(snapshot.val().dropoff),
-          title: snapshot.val().tool,
-          allDay: false
+          endTime: new Date(snapshot.val().pickup),
+          title: "Pickup " + tool.tool,
+          allDay: true
         })
-        console.log('scope events', $scope.calendar.eventSource);
+        $scope.calendar.eventSource.push({
+            startTime: new Date(snapshot.val().dropoff),
+            endTime: new Date(snapshot.val().dropoff),
+            title: "Dropoff " + tool.tool,
+            allDay: true
+          })
+          // console.log('scope events', $scope.calendar.eventSource);
         $scope.$broadcast('eventSourceChanged', $scope.calendar.eventSource)
-        $scope.$apply()
-        // debugger
+        // $scope.$apply()
       })
     })
-    // console.log('scope events', $scope.events)
-    // get tool reservation and add to owners calendar
-    // change the event names in each template
-    // get tool name
+  })
+
+  // get tool reservation and add to owners calendar
+  // change the event names in each template
+  // get tool name
 
   $scope.changeMode = function(mode) {
     $scope.calendar.mode = mode;
-  };
-
-  $scope.loadEvents = function() {
-    setTimeout(() => {
-      $scope.calendar.eventSource = createRandomEvents()
-      $scope.$broadcast('eventSourceChanged', $scope.calendar.eventSource)
-      $scope.$apply()
-    }, 1000)
   };
 
   $scope.onEventSelected = function(event) {
@@ -62,45 +63,5 @@ controllerModule.controller('CalendarCtrl', function($scope, $location, MessageF
   $scope.onTimeSelected = function(selectedTime, events, disabled) {
     console.log('Selected time: ' + selectedTime + ', hasEvents: ' + (events !== undefined && events.length !== 0) + ', disabled: ' + disabled);
   };
-
-  function createRandomEvents() {
-
-    var events = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        events.push({
-          title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: true
-        });
-      } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        events.push({
-          title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: false
-        });
-      }
-    }
-    return events;
-  }
-
-
 
 })

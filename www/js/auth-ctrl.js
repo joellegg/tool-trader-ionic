@@ -128,7 +128,8 @@ controllerModule.controller('AuthCtrl', function($scope, $location, $cordovaCame
           "lastName": $scope.last,
           "bio": $scope.bio,
           "dob": $scope.dob,
-          "profilePic": imageResponse
+          "profilePic": imageResponse,
+          "memberSince": new Date()
         };
         AuthFactory.addUser(newUser);
       })

@@ -9,7 +9,7 @@ controllerModule.controller('ResultsSearchCtrl', function($scope, $location, $io
 
   // Triggered on a button click, or some other target
   $scope.showPopup = function(toolKey, owner) {
-    console.log(toolKey, owner);
+    // console.log(toolKey, owner);
     let clickedToolKey = toolKey;
     let toolOwner = owner;
     $scope.data = {};
