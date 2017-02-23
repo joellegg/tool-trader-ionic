@@ -57,25 +57,21 @@ controllerModule.controller('AuthCtrl', function($scope, $location, $cordovaCame
       saveToPhotoAlbum: false
     };
 
-    $cordovaCamera.getPicture(options)
-      .then(function(results) {
-          // read the image into an array buffer since firebase likes blobs so get one with the cordova file plugin
-          fileName = results.replace(/^.*[\\\/]/, '');
-          // straight from cordova docs
-          $cordovaFile.readAsArrayBuffer(cordova.file.tempDirectory, fileName)
-            .then(function(success) {
-              // success - get blob data
-              imageBlob = new Blob([success], { type: "image/jpeg" });
-              alert('Image successfully added!');
-            }, function(error) {
-              // error
-              alert('error taking photo', error)
-            });
-        },
-        function(error) {
-          // error getting photos
-          alert('error getting photo', error)
+    $cordovaCamera.getPicture(options).then(function(imageURI) {
+      window.resolveLocalFileSystemURL(imageURI, function(fileEntry) {
+        fileName = imageURI.replace(/^.*[\\\/]/, '');
+        fileEntry.file(function(file) {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            // This blob object can be saved to firebase
+            imageBlob = new Blob([this.result], { type: "image/jpeg" });
+          };
+          reader.readAsArrayBuffer(file);
         });
+      }, function(error) {
+        console.log(error)
+      });
+    });
   };
 
 
@@ -103,14 +99,10 @@ controllerModule.controller('AuthCtrl', function($scope, $location, $cordovaCame
           // Observe state change events such as progress, pause, and resume
         }, function(error) {
           // Handle unsuccessful uploads
-          alert(error.message)
-          _callback(null)
+          reject(error)
         }, function() {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          let profilePic = uploadTask.snapshot.downloadURL;
-          alert(profilePic)
-          resolve(imageResponse = profilePic)
+          // Handle successful uploads on complete. For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          resolve(uploadTask.snapshot.downloadURL)
         })
       }
     })
@@ -128,7 +120,7 @@ controllerModule.controller('AuthCtrl', function($scope, $location, $cordovaCame
       .then(() => {
         return uploadImage();
       })
-      .then(() => {
+      .then((imageResponse) => {
         let newUser = {
           "uid": newuid,
           "email": $scope.email,
@@ -143,8 +135,8 @@ controllerModule.controller('AuthCtrl', function($scope, $location, $cordovaCame
       .then(() => {
         $location.url('/tab/home')
       })
-      .catch(() => {
-        alert("Sorry, there must have been a problem")
+      .catch((error) => {
+        alert(JSON.stringify(error))
       })
   };
 

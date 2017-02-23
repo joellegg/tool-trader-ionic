@@ -8,30 +8,6 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
   //////  get current users id and assign them their tools  ////
   //////////////////////////////////////////////////////////
 
-  // let uid = AuthFactory.getUserId();
-  // // get users tools
-  // ToolsFactory.getUsersTools(uid)
-  //   .then((res) => {
-  //     console.log('response', res)
-  //     $scope.currentUsersTools = res;
-  //   })
-  //   // get users reservations
-  //   .then(() => {
-  //     console.log('something else');
-  //     // grab user profile then reservations
-  //     AuthFactory.getUserReservations(uid).then((res) => {
-  //       // console.log('reservations response', res);
-  //       let reservations = res;
-  //       for (key in reservations) {
-  //         console.log(key, reservations[key]);
-  //         // make a call for each key to firebase to get the tool and push into array -- more important for millions of pieces of data
-  //       }
-  //       // $scope.userRentals.push($scope.tools[key2]);
-  //     });
-  //   });
-
-
-
   AuthFactory.getUser()
     .then((res) => {
       currentUser = res
@@ -96,12 +72,12 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
               alert('image successfully added')
             }, function(error) {
               // error
-              alert('error uploading', error)
+              alert('error uploading' + JSON.stringify(error))
             });
         },
         function(error) {
           // error getting photos
-          alert('error getting photo', error)
+          alert('error getting photo' + JSON.stringify(error))
         });
   };
 
@@ -118,25 +94,21 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
       saveToPhotoAlbum: false
     };
 
-    $cordovaCamera.getPicture(options)
-      .then(function(results) {
-          // read the image into an array buffer since firebase likes blobs so get one with the cordova file plugin
-          fileName = results.replace(/^.*[\\\/]/, '');
-          // straight from cordova docs
-          $cordovaFile.readAsArrayBuffer(cordova.file.tempDirectory, fileName)
-            .then(function(success) {
-              // success - get blob data
-              imageBlob = new Blob([success], { type: "image/jpeg" });
-              alert('Image successfully added!');
-            }, function(error) {
-              // error
-              alert('error taking photo', error)
-            });
-        },
-        function(error) {
-          // error getting photos
-          alert('error getting photo', error)
+    $cordovaCamera.getPicture(options).then(function(imageURI) {
+      window.resolveLocalFileSystemURL(imageURI, function(fileEntry) {
+        fileName = imageURI.replace(/^.*[\\\/]/, '');
+        fileEntry.file(function(file) {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            // This blob object can be saved to firebase
+            imageBlob = new Blob([this.result], { type: "image/jpeg" });
+          };
+          reader.readAsArrayBuffer(file);
         });
+      }, function(error) {
+        console.log(error)
+      });
+    });
   };
 
   ////////////////////////////////////
@@ -163,13 +135,10 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
           // Observe state change events such as progress, pause, and resume
         }, function(error) {
           // Handle unsuccessful uploads
-          alert(error.message)
-          _callback(null)
+          reject(error)
         }, function() {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          let toolImage = uploadTask.snapshot.downloadURL;
-          resolve(imageResponse = toolImage)
+          // Handle successful uploads on complete. For instance, get the download URL
+          resolve(uploadTask.snapshot.downloadURL)
         })
       }
     })
@@ -177,7 +146,7 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
 
   $scope.addTool = function() {
     uploadImage()
-      .then(() => {
+      .then((imageResponse) => {
         let newTool = {
           "category": $scope.modal1.category,
           "condition": $scope.modal1.condition,
@@ -192,8 +161,8 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
       .then(() => {
         $scope.modal1.hide();
       })
-      .catch(() => {
-        alert('there must have been a problem')
+      .catch((error) => {
+        alert(JSON.stringify(error))
       });
   }
 
@@ -225,9 +194,9 @@ controllerModule.controller('AddToolCtrl', function($scope, $ionicModal, $locati
         }, function() {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          let toolImage = uploadTask.snapshot.downloadURL;
-          alert(toolImage)
-          resolve(imageResponse = toolImage)
+          // let toolImage = ;
+          // alert(toolImage)
+          resolve(uploadTask.snapshot.downloadURL)
 
           // when done pass back information on the saved image
           // _callback(uploadTask.snapshot)

@@ -2,13 +2,16 @@ controllerModule.controller('CalendarCtrl', function($scope, $location, MessageF
   'use strict';
   $scope.calendar = {};
 
+  // get reservations from users -- missing reservations for tool owners
+  // change the event names in each template
+  // get tool name
+
   $scope.changeMode = function(mode) {
     $scope.calendar.mode = mode;
   };
 
   $scope.loadEvents = function() {
     $scope.calendar.eventSource = createRandomEvents();
-    console.log('loadEvents')
   };
 
   $scope.onEventSelected = function(event) {
