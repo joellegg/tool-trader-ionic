@@ -97,6 +97,12 @@
   display: flex;
   justify-content: space-between;
 }
+.item-padding-right {
+  padding-right: -50px;
+}
+.item-complex .item-content {
+  padding-right: 20px !important;
+}
 
 /* POPUP */
 .popup-vertical-buttons button

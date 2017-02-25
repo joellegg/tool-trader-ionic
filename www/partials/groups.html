@@ -5,14 +5,15 @@
   </ion-header-bar>
   <ion-content class="padding">
     <ion-list can-swipe="listCanSwipe">
+
       <ion-item class="item item-avatar" ng-click="changeRoute(chat.groupKey)" ng-repeat="chat in usersChats  | orderBy: '-timeStamp' ">
         <img ng-src="{{chat.chatImage}}">
-        <div class="message-inline">
-          <h2>{{chat.name}}</h2>
-          <h4>{{chat.timeStamp}}</h4>
-        </div>
-        <h3>{{chat.subject}}</h3>
-        <p>{{chat.lastMessage}}...</p>
+          <div class="message-inline">
+            <h2>{{chat.name}}</h2>
+            <h4>{{chat.timeStamp}}</h4>
+          </div>
+          <h3>{{chat.subject}}</h3>
+          <p>{{chat.lastMessage}}...</p>
         <ion-option-button class="button-assertive button-large button-center" ng-click="deleteChat(chat.groupKey)">
           <i class="icon ion-ios-trash"></i>
         </ion-option-button>
