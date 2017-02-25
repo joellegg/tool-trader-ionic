@@ -1,5 +1,5 @@
 controllerModule.controller('MessageCtrl', function($scope, $location, $stateParams, $ionicScrollDelegate, $cordovaKeyboard, AuthFactory, ToolsFactory, $timeout) {
-  // $cordovaKeyboard.disableScroll(true)
+  $cordovaKeyboard.disableScroll(true)
 
   // $scope.currentUser;
   let chatGroup = $stateParams.chatgroup;
