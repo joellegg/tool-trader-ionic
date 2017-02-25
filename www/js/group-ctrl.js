@@ -42,21 +42,28 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
     $location.url(`/messages/${groupKey}`)
   }
 
-  // remove chat from firebase and from local storage
-  // remove group from user and remove messages
   $scope.deleteChat = (group) => {
-    // chatRef.child(group).remove();
-    // memberRef.child(group).remove();
-    let chatMessages = messageRef.orderBy('chat').equalTo(group);
-    // chatMessages.remove();
-    console.log(chatMessages)
-    // messageRef.equalTo(group).remove();
-    // for (i = 0; i < $scope.usersChats.length; i++) {
-    //   if (group === $scope.usersChats[i].groupKey) {
-    //     console.log(i);
-    //     $scope.usersChats.splice(i, 1)
-    //   }
-    // }
+    // remove chat from firebase
+    chatRef.child(group).remove();
+    memberRef.child(group).remove();
+    // remove messages from firebase
+    MessageFactory.getMessages(group).then((response) => {
+      for (key in response) {
+        if (response[key].chat === group) {
+          MessageFactory.removeMessage(key);
+        }
+      }
+    });
+    // remove group from user
+    MessageFactory.removeGroupFromUser($scope.currentUid, group);
+    // remove group from tool owner
+    // remove from local storage
+    for (i = 0; i < $scope.usersChats.length; i++) {
+      if (group === $scope.usersChats[i].groupKey) {
+        console.log(i);
+        $scope.usersChats.splice(i, 1)
+      }
+    }
   }
 
 })
