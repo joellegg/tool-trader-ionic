@@ -12,6 +12,7 @@ firebase.initializeApp(config);
 const userRef = firebase.database().ref('users');
 const messageRef = firebase.database().ref('messages');
 const chatRef = firebase.database().ref('chats');
+const memberRef = firebase.database().ref('members');
 
 
 let controllerModule = angular.module('starter.controllers', [])

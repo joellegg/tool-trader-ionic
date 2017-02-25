@@ -112,6 +112,7 @@
 /* PROFILE */
 .profilePic {
   width: 100%;
+  border-radius: 50px;
 }
 
 /* MESSAGES */
@@ -138,4 +139,7 @@
   max-width: 75%;
   border-radius: 5px;
   padding: 0.5em;
+}
+.button-center {
+  justify-content: center;
 }

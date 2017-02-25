@@ -5,17 +5,18 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="row">
-      <div class="col-50">
+      <div class="col-67">
+        <h4>{{userProfile.firstName}} {{userProfile.lastName}}</h4>
+        <h4>{{userProfile.email}}</h4>
+        <h4>{{ date }}</h4>
+      </div>
+      <div class="col-33">
         <img class="profilePic" ng-src="{{ userProfile.profilePic }}">
       </div>
-      <div>
-        <h3>{{userProfile.firstName}}</h3>
-        <h3>{{userProfile.lastName}}</h3>
-      </div>
     </div>
-    <h3>{{userProfile.email}}</h3>
-    <h2>{{ date }}</h2>
-    <h2>bio</h2>
-    <h5>{{userProfile.bio}}</h5>
+
+
+    <h2><strong>bio</strong></h2>
+    <h4>{{userProfile.bio}}</h4>
   </ion-content>
 </ion-view>

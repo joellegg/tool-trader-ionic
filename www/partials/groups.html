@@ -4,9 +4,8 @@
     <button class="button button-clear button-primary ion-ios-compose navbar-icons-large" ng-click="compose()"></button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="list">
-
-      <div class="item item-avatar" ng-click="changeRoute(chat.groupKey)" ng-repeat="chat in usersChats  | orderBy: '-timeStamp' ">
+    <ion-list can-swipe="listCanSwipe">
+      <ion-item class="item item-avatar" ng-click="changeRoute(chat.groupKey)" ng-repeat="chat in usersChats  | orderBy: '-timeStamp' ">
         <img ng-src="{{chat.chatImage}}">
         <div class="message-inline">
           <h2>{{chat.name}}</h2>
@@ -14,8 +13,11 @@
         </div>
         <h3>{{chat.subject}}</h3>
         <p>{{chat.lastMessage}}...</p>
-      </div>
+        <ion-option-button class="button-assertive button-large button-center" ng-click="deleteChat(chat.groupKey)">
+          <i class="icon ion-ios-trash"></i>
+        </ion-option-button>
+      </ion-item>
 
-    </div>
+    </ion-list>
   </ion-content>
 </ion-view>

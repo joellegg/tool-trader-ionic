@@ -1,8 +1,8 @@
 controllerModule.controller('GroupCtrl', function($scope, $location, MessageFactory, AuthFactory, $q) {
   $scope.currentUid = AuthFactory.getUserId();
+  $scope.listCanSwipe = true;
 
   let userGroups = {};
-  let chatImage = {};
   let recipients = [];
   $scope.usersChats = [];
 
@@ -15,7 +15,6 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
     // listen for new groups added
     .then(() => {
       userGroups.on('child_added', (snapshot, prevChildKey) => {
-        // console.log('child_added', snapshot.key);
         // get details of each group the member belongs to
         MessageFactory.getChatGroups(snapshot.key)
           .then((response) => {
@@ -25,12 +24,11 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
             // get chat group members
             MessageFactory.getMembers(snapshot.key).then((res) => {
               for (user in res) {
-                // console.log(user);
                 // get the first name of the members that are not the current user
                 if (user !== $scope.currentUid) {
                   AuthFactory.getRecipientInfo(user).then((res) => {
-                    // console.log(res.firstName, res.lastName);
                     response.name = res.firstName + ' ' + res.lastName;
+                    // add the data to the usersChats reference to post to DOM
                     $scope.usersChats.push(response);
                   })
                 }
@@ -39,15 +37,26 @@ controllerModule.controller('GroupCtrl', function($scope, $location, MessageFact
           })
       })
     })
-    // .then(() => {
-    //   console.log($scope.usersChats)
-    // })
 
   $scope.changeRoute = (groupKey) => {
     $location.url(`/messages/${groupKey}`)
   }
 
-  // update chat time stamp for users groups
-  // chatRef.on()
+  // remove chat from firebase and from local storage
+  // remove group from user and remove messages
+  $scope.deleteChat = (group) => {
+    // chatRef.child(group).remove();
+    // memberRef.child(group).remove();
+    let chatMessages = messageRef.orderBy('chat').equalTo(group);
+    // chatMessages.remove();
+    console.log(chatMessages)
+    // messageRef.equalTo(group).remove();
+    // for (i = 0; i < $scope.usersChats.length; i++) {
+    //   if (group === $scope.usersChats[i].groupKey) {
+    //     console.log(i);
+    //     $scope.usersChats.splice(i, 1)
+    //   }
+    // }
+  }
 
 })
