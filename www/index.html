@@ -3,27 +3,44 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Todo</title>
+  <title>tool-trader</title>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
+  <link href="https://fonts.googleapis.com/css?family=Aclonica" rel="stylesheet">
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="lib/ionic-calendar/dist/css/calendar.min.css">
+  <link href="css/style.css" rel="stylesheet">
+
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
   <!-- lib -->
-  <script src="lib/firebase/firebase.js"></script>
   <script src="lib/ionic/js/ionic.bundle.js"></script>
-  <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
+  <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
   <script src="cordova.js"></script>
+  <script src="lib/firebase/firebase.js"></script>
+  <script src="lib/angularfire/dist/angularfire.min.js"></script>
+
+  <!-- calendar -->
+  <script src="lib/ionic-calendar/dist/js/calendar-tpls.min.js"></script>
+
+  <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
   <script src="js/app.js"></script>
-  <script src="js/factories.js"></script>
-  <script src="js/controllers.js"></script>
 
   <!-- factories -->
-  <!-- <script src="factories/toolsFactory.js"></script> -->
+  <script src="factories/authFactory.js"></script>
+  <script src="factories/toolsFactory.js"></script>
+  <script src="factories/messageFactory.js"></script>
   <!-- controllers -->
-  <!-- <script src="/www/js/toolSearchCtrl.js"></script> -->
+  <script src="js/add-tool-ctrl.js"></script>
+  <script src="js/profile-ctrl.js"></script>
+  <script src="js/auth-ctrl.js"></script>
+  <script src="js/tool-search-ctrl.js"></script>
+  <script src="js/results-ctrl.js"></script>
+  <script src="js/message-ctrl.js"></script>
+  <script src="js/group-ctrl.js"></script>
+  <script src="js/calendar-ctrl.js"></script>
+
 </head>
 
 <body ng-app="ionicApp">

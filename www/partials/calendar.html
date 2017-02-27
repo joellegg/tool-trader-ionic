@@ -1,9 +1,17 @@
 <ion-view title="Calendar">
-  <ion-content>
-    <div class="list">
-      <div class="item">
-        Calendar boss
-      </div>
+  <ion-header-bar class="bar-energized bar bar-header disable-user-behavior" align-title="left">
+    <div class="title title-left header-item">{{viewTitle}}</div>
+    <div class="buttons buttons-right">
+      <span class="right-buttons">
+        <button class="button" ng-disabled="isToday()" ng-click="today()">Today</button>
+        <button class="button" ng-click="changeMode('month')">M</button>
+        <button class="button" ng-click="changeMode('week')">W</button>
+        <button class="button" ng-click="changeMode('day')">D</button>
+      </span>
     </div>
+  </ion-header-bar>
+
+  <ion-content scroll="false" class="main-content">
+    <calendar ng-model="calendar.currentDate" calendar-mode="calendar.mode" event-source="calendar.eventSource" range-changed="reloadSource(startTime, endTime)" event-selected="onEventSelected(event)" title-changed="onViewTitleChanged(title)" time-selected="onTimeSelected(selectedTime, events, disabled)" step="30"></calendar>
   </ion-content>
 </ion-view>

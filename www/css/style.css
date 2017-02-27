@@ -1,4 +1,151 @@
 /* Empty. Add your own CSS if you like */
-.toolProfile {
-  margin-top: 3em;
+
+/* FORMS */
+.form-right-align {
+  text-align: right;
+}
+
+/* AUTH PAGE*/
+
+#logo {
+  font-size: 4em !important;
+}
+
+.logo {
+  font-family: 'Aclonica', sans-serif;
+  font-size: 3.5em;
+}
+
+.ion-settings:before {
+  font-size: 4em;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center
+}
+
+
+/*Buttons*/
+
+.squareAdd {
+  height: 5em;
+  width: 100%;
+}
+
+
+/*Rows*/
+
+.padding-5 {
+  padding: 0.5%;
+}
+.gallery {
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.gallery > .col {
+  width: 22%;
+  flex-wrap: wrap;
+}
+
+.toolPics {
+  width: 100%;
+  height: auto;
+  max-height: 6em;
+}
+
+/* SEARCH PAGE */
+.searchContainer {
+  display: flex;
+}
+.column1 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1%;
+}
+.column2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.noMargin {
+  margin: 0;
+}
+
+.search-button-margin {
+  margin-right: 1em;
+}
+
+.search-form {
+  background-color: #B3B3B3;
+  padding: 2%;
+  border-radius: 10px;
+}
+.bar-energized .button.button-clear {
+ font-size: 18px;
+}
+.navbar-icons-large {
+  font-size: 25px !important;
+}
+
+/* MESSAGE-MAIN */
+.message-inline {
+  display: flex;
+  justify-content: space-between;
+}
+.item-padding-right {
+  padding-right: -50px;
+}
+.item-complex .item-content {
+  padding-right: 20px !important;
+}
+
+/* POPUP */
+.popup-vertical-buttons button
+{
+    min-width: 100%;
+    margin-bottom: 5px;
+}
+.popup-vertical-buttons .popup-buttons
+{
+    display: block;
+}
+
+/* PROFILE */
+.profilePic {
+  width: 100%;
+  border-radius: 50px;
+}
+
+/* MESSAGES */
+.userMessage {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5em;
+}
+.notUserMessage {
+  display: flex;
+  padding: 0.5em;
+}
+.userMessage-style {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #B3B3B3;
+  max-width: 75%;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.notUserMessage-style {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 75%;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.button-center {
+  justify-content: center;
 }

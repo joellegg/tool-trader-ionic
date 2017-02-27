@@ -1,0 +1,56 @@
+<!-- Modal to add a new tool -->
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">Add to Tool Shed</h1>
+    <button class="button button-clear button-primary" ng-click="hideAddToolModal()">Cancel</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <form name="newTool" ng-submit="newTool.$valid && addTool()" novalidate>
+    <!-- newTool.$valid &&  -->
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Category
+          </div>
+          <select ng-model="modal1.category" required>
+            <option>Air Compressors, Tools & Accessories</option>
+            <option>Automotive</option>
+            <option>Hand Tools</option>
+            <option>Hardware</option>
+            <option>Power Tool Accessories</option>
+            <option>Power Tools</option>
+            <option>Safety & Security</option>
+            <option>Tool Storage</option>
+            <option>Welding & Soldering</option>
+            <option>Wet/Dry Vacuums</option>
+            <option>Workwear, Safety Gear & Equipment</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Tool</span>
+          <input ng-model="modal1.tool" type="text" class="form-right-align" required>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Condition
+          </div>
+          <select ng-model="modal1.condition" required>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Fair</option>
+            <option>Poor</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cost Per Day</span>
+          <input ng-model="modal1.price" type="number" min="0" step="1" class="form-right-align" required>
+        </label>
+        <div>
+          <button type="button" class="button icon-left ion-ios-camera button-full button-dark" ng-click="takePicture()">Take Picture</button>
+          <button type="button" class="button icon-left ion-ios-photos button-full button-dark" ng-click="doGetPicture()">Upload Picture</button>
+        </div>
+        <button class="button icon-left ion-ios-plus button-full button-energized" type="submit">Add Tool</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

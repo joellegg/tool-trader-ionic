@@ -1,0 +1,26 @@
+<!-- Search bar for tools to rent -->
+<ion-view title="Search Results">
+
+  <ion-header-bar class="bar bar-energized bar-header item-input-inset">
+    <button class="button ion-ios-arrow-back button-clear button-primary" ui-sref="search"></button>
+    <h1 class="title">Search Results</h1>
+    <button class="button button-clear button-primary" ui-sref="tabs.home">Home</button>
+  </ion-header-bar>
+
+  <ion-content class="padding">
+    <div class="searchContainer" ng-repeat="tool in availableTools | limitTo:10 ">
+      <div class="col-25">
+        <img class="toolPics" ng-click="showPopup(tool.toolKey, tool.owner)" ng-src="{{ tool.toolImage }}">
+        <!-- reserve(tool.toolKey) -->
+      </div>
+      <div class="col-75 column1">
+        <div class="column2">
+          <h3 class="noMargin">{{ tool.tool }}</h3>
+          <h4 class="noMargin">owner rating</h4>
+        </div>
+        <h5 class="noMargin">Condition: {{ tool.condition }}</h5>
+        <h5 class="noMargin">Price per day: {{ tool.price }}$</h5>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

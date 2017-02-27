@@ -1,20 +1,26 @@
-<div ion-nav-view="search">
-  <div class="bar bar-energized bar-header item-input-inset">
-    <label class="item-input-wrapper">
-      <i class="icon ion-ios-search placeholder-icon"></i>
-      <input type="search" placeholder="Search">
-    </label>
-  </div>
-</div>
-
+<!-- Tool Shed & Rental History -->
 <ion-view view-title="Home">
-  <ion-content class="padding">
-    <div class="toolProfile">
-      <h1>Tool shed</h1>
-      <p ng-repeat="(key, value) in tools">{{value.tool}}</p>
-      <p>
-        <a class="button icon icon-right ion-chevron-right" href="#/tab/toolRental">Tool Rental</a>
-      </p>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">Home</h1>
+    <button class="button button-clear ion-ios-search-strong navbar-icons-large" ui-sref="search"></button>
+  </ion-header-bar>
+  <ion-content class="padding has-header">
+    <h2>Tool Shed</h2>
+    <div class="gallery">
+      <div class="col-25 padding-5">
+        <button class="button button-energized squareAdd" ng-click="showAddToolModal()">
+          <h1>+</h1>
+        </button>
+      </div>
+      <div class="col-25 padding-5" ng-repeat="(key, value) in currentUsersTools">
+        <img class="toolPics" ng-click="editThisTool(value.toolKey)" ng-src="{{ value.toolImage }}">
+      </div>
+    </div>
+    <h2>Rentals</h2>
+    <div class="gallery">
+      <div class="col-25 padding-5" ng-repeat="(key, value) in userRentals track by $index">
+        <img class="toolPics" ng-src="{{ value.toolImage }}">
+      </div>
     </div>
   </ion-content>
 </ion-view>

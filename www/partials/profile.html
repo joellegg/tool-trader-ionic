@@ -1,9 +1,22 @@
 <ion-view title="Profile">
-  <ion-content>
-    <div class="list">
-      <div class="item">
-        Profile page
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">Profile</h1>
+    <button id="logout" class="button button-clear button-primary" ng-click="logout()">logout</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="row">
+      <div class="col-67">
+        <h4>{{userProfile.firstName}} {{userProfile.lastName}}</h4>
+        <h4>{{userProfile.email}}</h4>
+        <h4>{{ date }}</h4>
+      </div>
+      <div class="col-33">
+        <img class="profilePic" ng-src="{{ userProfile.profilePic }}">
       </div>
     </div>
+
+
+    <h2><strong>bio</strong></h2>
+    <h4>{{userProfile.bio}}</h4>
   </ion-content>
 </ion-view>

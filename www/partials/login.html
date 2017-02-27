@@ -1,0 +1,20 @@
+<!-- Modal to add a new tool -->
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-energized">
+    <h1 class="title">Login</h1>
+    <button class="button button-clear button-primary" ui-sref="authorize">Cancel</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input type="email" ng-model="$parent.email">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" ng-model="$parent.password">
+      </label>
+      <button class="button button-full button-energized" ng-click="login()">login</button>
+    </div>
+  </ion-content>
+</ion-modal-view>
