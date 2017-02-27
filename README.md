@@ -11,6 +11,11 @@ Tool-trader is a mobile app that allows you to borrow or rent tools from friends
 <img src="img/ngCordova.png" alt="ngCordova" height="35px">
 
 ## The mockup
+<img src="img/login.png" alt="login" height= "200px"><img src="img/home-screen.png" alt="login" height= "200px">
+<img src="img/messages.png" alt="login" height= "200px">
+<img src="img/profile.png" alt="login" height= "200px">
+<img src="img/tool-search.png" alt="login" height= "200px">
+<img src="img/calendar.png" alt="login" height= "200px">
 [moqups](https://app.moqups.com/joellegg/wQNH7hWKnS/view)
 
 ## The queue
