@@ -1,5 +1,7 @@
 # tool-trader
-===================
+
+## The tech
+### ![Firebase ](img/FirebaseLogo50px.png "Firebase ")
 
 ## Overview
 
