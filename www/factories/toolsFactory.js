@@ -10,7 +10,7 @@ factoryModule.factory('ToolsFactory', function($http) {
       return $http.get('https://tool-trader.firebaseio.com/users.json').then(res => res.data);
     },
     newTool: (newTool) => {
-      $http.post('https://tool-trader.firebaseio.com/tools.json', newTool).then(alert("Tool successfully added!"));
+      $http.post('https://tool-trader.firebaseio.com/tools.json', newTool);
     },
     updateTool: (key, data) => {
       return $http.patch(`https://tool-trader.firebaseio.com/tools/${key}.json`, data);
