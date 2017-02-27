@@ -8,10 +8,12 @@ Tool-trader is a mobile app that allows you to borrow or rent tools from friends
 <img src="img/angular.png" alt="Angular" height="30px">
 <img src="img/firebase.png" alt="Firebase" height="30px">
 <img src="img/ionic.png" alt="Ionic" height="30px">
+<img src="img/ngCordova.png" alt="ngCordova" height="30px">
+
+## The mockup
+[moqups](https://app.moqups.com/joellegg/wQNH7hWKnS/view)
 
 ## Links
 [github project](https://github.com/joellegg/tool-trader-ionic/projects/1)
 
 [github repo](https://github.com/joellegg/tool-trader-ionic)
-
-[moqups](https://app.moqups.com/joellegg/wQNH7hWKnS/view)
